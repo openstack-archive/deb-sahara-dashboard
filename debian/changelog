@@ -1,5 +1,5 @@
-sahara-dashboard (2.0.0~b2-1) experimental; urgency=medium
+sahara-dashboard (4.0.0~b2-1) experimental; urgency=medium
 
-  * Initial release. (Closes: #)
+  * Initial release. (Closes: #812836)
 
  -- Thomas Goirand <zigo@debian.org>  Mon, 25 Jan 2016 21:39:26 +0800
