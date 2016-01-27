@@ -1,0 +1,32 @@
+Source: sahara-dashboard
+Section: python
+Priority: extra
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Uploaders: Thomas Goirand <zigo@debian.org>,
+Build-Depends: debhelper (>= 9),
+               dh-python,
+               openstack-pkg-tools,
+               python-all,
+               python-pbr (>= 1.8),
+               python-setuptools,
+               python-sphinx,
+Build-Depends-Indep: openstack-dashboard (>= 9.0.0~b2),
+                     python-unittest2,
+                     testrepository,
+Standards-Version: 3.9.6
+Vcs-Git: git://anonscm.debian.org/openstack/sahara-dashboard.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=openstack/sahara-dashboard.git;a=summary
+Homepage: https://github.com/stackforge/sahara-dashboard
+
+Package: python-sahara-dashboard
+Architecture: all
+Depends: openstack-dashboard (>= 9.0.0~b2),
+         python-pbr (>= 1.8),
+         ${misc:Depends},
+         ${python:Depends},
+Description: OpenStack data processing cluster as a service - dashboard plugin
+ The Sahara project provides a simple means to provision a data-intensive
+ application cluster (Hadoop or Spark) on top of OpenStack. It's the ex
+ Savanna project, renamed due to potential trademark issues.
+ .
+ This package contains the OpenStack dashboard plugin.
