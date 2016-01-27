@@ -16,9 +16,9 @@ ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 		NOSE_OPENSTACK_RED=0.05 \
 		NOSE_OPENSTACK_YELLOW=0.025 \
 		NOSE_OPENSTACK_SHOW_ELAPSED=1 \
-		DJANGO_SETTINGS_MODULE=saharadashboard.tests.settings \
+		DJANGO_SETTINGS_MODULE=saharadashboard.test.settings \
 		python-coverage run \
-		$(CURDIR)/manage.py test sahara_dashboard --settings=sahara_dashboard.tests.settings
+		$(CURDIR)/manage.py test sahara_dashboard --settings=sahara_dashboard.test.settings
 endif
 
 override_dh_clean:
