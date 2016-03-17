@@ -5,6 +5,7 @@ sahara-dashboard (4.0.0~b3-1) experimental; urgency=medium
 
   [ Thomas Goirand ]
   * New upstream release.
+  * Fixed (build-)depends for this release.
 
  -- Thomas Goirand <zigo@debian.org>  Thu, 17 Mar 2016 22:41:41 +0100
 
