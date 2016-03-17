@@ -14,14 +14,12 @@
 import logging
 
 from django.conf import settings
+from saharaclient.api.base import APIException
+from saharaclient import client as api_client
 
 from horizon import exceptions
 from horizon.utils.memoized import memoized  # noqa
 from openstack_dashboard.api import base
-
-from saharaclient.api.base import APIException
-from saharaclient import client as api_client
-
 
 LOG = logging.getLogger(__name__)
 
@@ -136,10 +134,13 @@ def nodegroup_template_create(request, name, plugin_name, hadoop_version,
                               availability_zone=False,
                               volumes_availability_zone=False,
                               volume_type=None,
+                              image_id=None,
                               is_proxy_gateway=False,
                               volume_local_to_instance=False,
                               use_autoconfig=None,
-                              shares=None):
+                              shares=None,
+                              is_public=None,
+                              is_protected=None):
     return client(request).node_group_templates.create(
         name=name,
         plugin_name=plugin_name,
@@ -156,10 +157,13 @@ def nodegroup_template_create(request, name, plugin_name, hadoop_version,
         availability_zone=availability_zone,
         volumes_availability_zone=volumes_availability_zone,
         volume_type=volume_type,
+        image_id=image_id,
         is_proxy_gateway=is_proxy_gateway,
         volume_local_to_instance=volume_local_to_instance,
         use_autoconfig=use_autoconfig,
-        shares=shares)
+        shares=shares,
+        is_public=is_public,
+        is_protected=is_protected)
 
 
 def nodegroup_template_list(request, search_opts=None):
@@ -184,13 +188,16 @@ def nodegroup_template_update(request, ngt_id, name, plugin_name,
                               volumes_size=None, node_processes=None,
                               node_configs=None, floating_ip_pool=None,
                               security_groups=None, auto_security_group=False,
-                              availability_zone=False,
-                              volumes_availability_zone=False,
+                              availability_zone=None,
+                              volumes_availability_zone=None,
                               volume_type=None,
                               is_proxy_gateway=False,
                               volume_local_to_instance=False,
                               use_autoconfig=None,
-                              shares=None):
+                              shares=None,
+                              is_protected=None,
+                              is_public=None,
+                              image_id=None):
     return client(request).node_group_templates.update(
         ng_template_id=ngt_id,
         name=name,
@@ -211,14 +218,18 @@ def nodegroup_template_update(request, ngt_id, name, plugin_name,
         is_proxy_gateway=is_proxy_gateway,
         volume_local_to_instance=volume_local_to_instance,
         use_autoconfig=use_autoconfig,
-        shares=shares)
+        shares=shares,
+        is_public=is_public,
+        is_protected=is_protected,
+        image_id=image_id)
 
 
 def cluster_template_create(request, name, plugin_name, hadoop_version,
                             description=None, cluster_configs=None,
                             node_groups=None, anti_affinity=None,
                             net_id=None, use_autoconfig=None,
-                            shares=None):
+                            shares=None,
+                            is_public=None, is_protected=None):
     return client(request).cluster_templates.create(
         name=name,
         plugin_name=plugin_name,
@@ -229,7 +240,9 @@ def cluster_template_create(request, name, plugin_name, hadoop_version,
         anti_affinity=anti_affinity,
         net_id=net_id,
         use_autoconfig=use_autoconfig,
-        shares=shares)
+        shares=shares,
+        is_public=is_public,
+        is_protected=is_protected)
 
 
 def cluster_template_list(request, search_opts=None):
@@ -248,7 +261,8 @@ def cluster_template_update(request, ct_id, name, plugin_name,
                             hadoop_version, description=None,
                             cluster_configs=None, node_groups=None,
                             anti_affinity=None, net_id=None,
-                            use_autoconfig=None, shares=None):
+                            use_autoconfig=None, shares=None,
+                            is_public=None, is_protected=None):
     try:
         template = client(request).cluster_templates.update(
             cluster_template_id=ct_id,
@@ -261,7 +275,10 @@ def cluster_template_update(request, ct_id, name, plugin_name,
             anti_affinity=anti_affinity,
             net_id=net_id,
             use_autoconfig=use_autoconfig,
-            shares=shares)
+            shares=shares,
+            is_public=is_public,
+            is_protected=is_protected
+        )
 
     except APIException as e:
         raise exceptions.Conflict(e)
@@ -272,7 +289,8 @@ def cluster_create(request, name, plugin_name, hadoop_version,
                    cluster_template_id=None, default_image_id=None,
                    is_transient=None, description=None, cluster_configs=None,
                    node_groups=None, user_keypair_id=None, anti_affinity=None,
-                   net_id=None, count=None, use_autoconfig=None):
+                   net_id=None, count=None, use_autoconfig=None,
+                   is_public=None, is_protected=None):
     return client(request).clusters.create(
         name=name,
         plugin_name=plugin_name,
@@ -287,7 +305,9 @@ def cluster_create(request, name, plugin_name, hadoop_version,
         anti_affinity=anti_affinity,
         net_id=net_id,
         count=count,
-        use_autoconfig=use_autoconfig)
+        use_autoconfig=use_autoconfig,
+        is_public=is_public,
+        is_protected=is_protected)
 
 
 def cluster_scale(request, cluster_id, scale_object):
@@ -310,15 +330,28 @@ def cluster_delete(request, cluster_id):
     client(request).clusters.delete(cluster_id=cluster_id)
 
 
+def cluster_update(request, cluster_id, name=None, description=None,
+                   is_public=None, is_protected=None, shares=None):
+    return client(request).clusters.update(cluster_id,
+                                           name=name,
+                                           description=description,
+                                           is_public=is_public,
+                                           is_protected=is_protected,
+                                           shares=shares)
+
+
 def data_source_create(request, name, description, ds_type, url,
-                       credential_user=None, credential_pass=None):
+                       credential_user=None, credential_pass=None,
+                       is_public=None, is_protected=None):
     return client(request).data_sources.create(
         name=name,
         description=description,
         data_source_type=ds_type,
         url=url,
         credential_user=credential_user,
-        credential_pass=credential_pass)
+        credential_pass=credential_pass,
+        is_public=is_public,
+        is_protected=is_protected)
 
 
 def data_source_list(request, search_opts=None):
@@ -337,12 +370,16 @@ def data_source_update(request, ds_id, data):
     return client(request).data_sources.update(ds_id, data)
 
 
-def job_binary_create(request, name, url, description, extra):
+def job_binary_create(request, name, url, description, extra,
+                      is_public=None, is_protected=None):
     return client(request).job_binaries.create(
         name=name,
         url=url,
         description=description,
-        extra=extra)
+        extra=extra,
+        is_public=is_public,
+        is_protected=is_protected,
+    )
 
 
 def job_binary_list(request, search_opts=None):
@@ -387,14 +424,22 @@ def job_binary_internal_delete(request, jbi_id):
     client(request).job_binary_internals.delete(job_binary_id=jbi_id)
 
 
-def job_create(request, name, j_type, mains, libs, description, interface):
+def job_create(request, name, j_type, mains, libs, description, interface,
+               is_public=None, is_protected=None):
     return client(request).jobs.create(
         name=name,
         type=j_type,
         mains=mains,
         libs=libs,
         description=description,
-        interface=interface)
+        interface=interface,
+        is_public=is_public,
+        is_protected=is_protected)
+
+
+def job_update(request, job_id, is_public=None, is_protected=None):
+    return client(request).jobs.update(job_id=job_id, is_public=is_public,
+                                       is_protected=is_protected)
 
 
 def job_list(request, search_opts=None):
@@ -415,14 +460,23 @@ def job_get_configs(request, job_type):
 
 def job_execution_create(request, job_id, cluster_id,
                          input_id, output_id, configs,
-                         interface):
+                         interface, is_public=None, is_protected=None):
     return client(request).job_executions.create(
         job_id=job_id,
         cluster_id=cluster_id,
         input_id=input_id,
         output_id=output_id,
         configs=configs,
-        interface=interface)
+        interface=interface,
+        is_public=is_public,
+        is_protected=is_protected,
+    )
+
+
+def job_execution_update(request, jbe_id, is_public=None, is_protected=None):
+    return client(request).job_executions.update(job_execution_id=jbe_id,
+                                                 is_public=is_public,
+                                                 is_protected=is_protected)
 
 
 def _resolve_job_execution_names(job_execution, cluster=None,
@@ -470,3 +524,7 @@ def job_execution_delete(request, jex_id):
 
 def job_types_list(request):
     return client(request).job_types.list()
+
+
+def verification_update(request, cluster_id, status):
+    return client(request).clusters.verification_update(cluster_id, status)

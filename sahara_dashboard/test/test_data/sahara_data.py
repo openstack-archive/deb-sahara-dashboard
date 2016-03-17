@@ -12,8 +12,6 @@
 
 import copy
 
-from openstack_dashboard.test.test_data import utils
-
 from saharaclient.api import cluster_templates
 from saharaclient.api import clusters
 from saharaclient.api import data_sources
@@ -23,6 +21,8 @@ from saharaclient.api import job_types
 from saharaclient.api import jobs
 from saharaclient.api import node_group_templates
 from saharaclient.api import plugins
+
+from openstack_dashboard.test.test_data import utils
 
 
 def data(TEST):
@@ -103,7 +103,7 @@ def data(TEST):
 
     # Nodegroup_Templates.
     ngt1_dict = {
-        "created_at": "2014-06-04 14:01:03.701243",
+        "created_at": "2014-06-04T14:01:03",
         "description": None,
         "flavor_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
         "availability_zone": None,
@@ -134,6 +134,8 @@ def data(TEST):
         "is_proxy_gateway": False,
         "use_autoconfig": True,
         "shares": [],
+        'is_public': False,
+        'is_protected': False,
     }
 
     ngt1 = node_group_templates.NodeGroupTemplate(
@@ -145,7 +147,7 @@ def data(TEST):
     ct1_dict = {
         "anti_affinity": [],
         "cluster_configs": {},
-        "created_at": "2014-06-04 14:01:06.460711",
+        "created_at": "2014-06-04T14:01:06",
         "default_image_id": None,
         "description": "Sample description",
         "hadoop_version": "1.2.1",
@@ -153,10 +155,12 @@ def data(TEST):
         "name": "sample-cluster-template",
         "neutron_management_network": None,
         "use_autoconfig": True,
+        'is_public': False,
+        'is_protected': False,
         "node_groups": [
             {
                 "count": 1,
-                "created_at": "2014-06-04 14:01:06.462512",
+                "created_at": "2014-06-04T14:01:06",
                 "flavor_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
                 "floating_ip_pool": None,
                 "image_id": None,
@@ -179,10 +183,12 @@ def data(TEST):
                 "volumes_availability_zone": None,
                 "use_autoconfig": True,
                 "is_proxy_gateway": False,
+                'is_public': False,
+                'is_protected': False,
             },
             {
                 "count": 2,
-                "created_at": "2014-06-04 14:01:06.463214",
+                "created_at": "2014-06-04T14:01:06",
                 "flavor_id": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
                 "floating_ip_pool": None,
                 "image_id": None,
@@ -201,7 +207,9 @@ def data(TEST):
                 "volume_local_to_instance": False,
                 "volumes_availability_zone": None,
                 "use_autoconfig": True,
-                "is_proxy_gateway": False
+                "is_proxy_gateway": False,
+                'is_public': False,
+                'is_protected': False,
             }
         ],
         "shares": [],
@@ -219,7 +227,7 @@ def data(TEST):
         "anti_affinity": [],
         "cluster_configs": {},
         "cluster_template_id": "a2c3743f-31a2-4919-8d02-792138a87a98",
-        "created_at": "2014-06-04 20:02:14.051328",
+        "created_at": "2014-06-04T20:02:14",
         "default_image_id": "9eb4643c-dca8-4ea7-92d2-b773f88a8dc6",
         "description": "",
         "hadoop_version": "1.2.1",
@@ -230,16 +238,18 @@ def data(TEST):
         "name": "cercluster",
         "neutron_management_network": None,
         "use_autoconfig": True,
+        "is_public": False,
+        "is_protected": False,
         "node_groups": [
             {
                 "count": 1,
-                "created_at": "2014-06-04 20:02:14.053153",
+                "created_at": "2014-06-04T20:02:14",
                 "flavor_id": "0",
                 "floating_ip_pool": None,
                 "image_id": None,
                 "instances": [
                     {
-                        "created_at": "2014-06-04 20:02:14.834529",
+                        "created_at": "2014-06-04T20:02:14",
                         "id": "c3b8004b-7063-4b99-a082-820cdc6e961c",
                         "instance_id": "a45f5495-4a10-4f17-8fae",
                         "instance_name": "cercluster-master-001",
@@ -259,7 +269,7 @@ def data(TEST):
                     "hiveserver",
                     "oozie"
                 ],
-                "updated_at": "2014-06-04 20:02:14.841760",
+                "updated_at": "2014-06-04T20:02:14",
                 "volume_mount_prefix": "/volumes/disk",
                 "volumes_per_node": 0,
                 "volumes_size": 0,
@@ -273,13 +283,13 @@ def data(TEST):
             },
             {
                 "count": 2,
-                "created_at": "2014-06-04 20:02:14.053849",
+                "created_at": "2014-06-04T20:02:14",
                 "flavor_id": "0",
                 "floating_ip_pool": None,
                 "image_id": None,
                 "instances": [
                     {
-                        "created_at": "2014-06-04 20:02:15.097655",
+                        "created_at": "2014-06-04T20:02:15",
                         "id": "6a8ae0b1-bb28-4de2-bfbb-bdd3fd2d72b2",
                         "instance_id": "38bf8168-fb30-483f-8d52",
                         "instance_name": "cercluster-workers-001",
@@ -289,7 +299,7 @@ def data(TEST):
                         "volumes": []
                     },
                     {
-                        "created_at": "2014-06-04 20:02:15.344515",
+                        "created_at": "2014-06-04T20:02:15",
                         "id": "17b98ed3-a776-467a-90cf-9f46a841790b",
                         "instance_id": "85606938-8e53-46a5-a50b",
                         "instance_name": "cercluster-workers-002",
@@ -306,7 +316,7 @@ def data(TEST):
                     "datanode",
                     "tasktracker"
                 ],
-                "updated_at": "2014-06-04 20:02:15.355745",
+                "updated_at": "2014-06-04T20:02:15",
                 "volume_mount_prefix": "/volumes/disk",
                 "volumes_per_node": 0,
                 "volumes_size": 0,
@@ -324,10 +334,30 @@ def data(TEST):
         "status_description": "",
         "tenant_id": "429ad8447c2d47bc8e0382d244e1d1df",
         "trust_id": None,
-        "updated_at": "2014-06-04 20:02:15.446087",
+        "updated_at": "2014-06-04T20:02:15",
         "user_keypair_id": "stackboxkp"
     }
-
+    cluster1_dict.update({
+        'verification': {
+            'status': 'CHECKING',
+            'checks': [
+                {
+                    'status': 'CHECKING',
+                    'name': "Stupid check",
+                    'description': "Stupid description",
+                    "created_at": "2015-03-27T15:51:54",
+                    "updated_at": "2015-03-27T15:59:34",
+                },
+                {
+                    'status': 'RED',
+                    'name': "Stupid check",
+                    'description': "Houston, we have a problem",
+                    "created_at": "2015-03-27T15:51:54",
+                    "updated_at": "2015-03-27T15:59:34",
+                },
+            ]
+        }
+    })
     cluster1 = clusters.Cluster(
         clusters.ClusterManager(None), cluster1_dict)
     TEST.clusters.add(cluster1)
@@ -336,6 +366,25 @@ def data(TEST):
     cluster2_dict.update({
         "id": "cl2",
         "name": "cl2_name",
+        'verification': {
+            'status': 'RED',
+            'checks': [
+                {
+                    'status': 'GREEN',
+                    'name': "Stupid check",
+                    'description': "Stupid description",
+                    "created_at": "2015-03-27T15:51:54",
+                    "updated_at": "2015-03-27T15:59:34",
+                },
+                {
+                    'status': 'RED',
+                    'name': "Stupid check",
+                    'description': "Houston, we have a problem",
+                    "created_at": "2015-03-27T15:51:54",
+                    "updated_at": "2015-03-27T15:59:34",
+                },
+            ]
+        },
         "provision_progress": [
             {
                 "created_at": "2015-03-27T15:51:54",
@@ -381,25 +430,29 @@ def data(TEST):
 
     # Data Sources.
     data_source1_dict = {
-        "created_at": "2014-06-04 14:01:10.371562",
+        "created_at": "2014-06-04T14:01:10",
         "description": "sample output",
         "id": "426fb01c-5c7e-472d-bba2-b1f0fe7e0ede",
         "name": "sampleOutput",
         "tenant_id": "429ad8447c2d47bc8e0382d244e1d1df",
         "type": "swift",
         "updated_at": None,
-        "url": "swift://example.sahara/output"
+        "url": "swift://example.sahara/output",
+        'is_public': False,
+        'is_protected': False
     }
 
     data_source2_dict = {
-        "created_at": "2014-06-05 15:01:12.331361",
+        "created_at": "2014-06-05T15:01:12",
         "description": "second sample output",
         "id": "ab3413-adfb-bba2-123456785675",
         "name": "sampleOutput2",
         "tenant_id": "429ad8447c2d47bc8e0382d244e1d1df",
         "type": "hdfs",
         "updated_at": None,
-        "url": "hdfs://example.sahara/output"
+        "url": "hdfs://example.sahara/output",
+        'is_public': False,
+        'is_protected': False
     }
 
     data_source1 = data_sources.DataSources(
@@ -411,27 +464,31 @@ def data(TEST):
 
     # Job Binaries.
     job_binary1_dict = {
-        "created_at": "2014-06-05 18:15:15.581285",
+        "created_at": "2014-06-05T18:15:15",
         "description": "",
         "id": "3f3a07ac-7d6f-49e8-8669-40b25ee891b7",
         "name": "example.pig",
         "tenant_id": "429ad8447c2d47bc8e0382d244e1d1df",
         "updated_at": None,
-        "url": "internal-db://80121dea-f8bd-4ad3-bcc7-096f4bfc722d"
+        "url": "internal-db://80121dea-f8bd-4ad3-bcc7-096f4bfc722d",
+        'is_public': False,
+        'is_protected': False
     }
 
     job_binary2_dict = {
-        "created_at": "2014-10-10 13:12:15.583631",
+        "created_at": "2014-10-10T13:12:15",
         "description": "Test for spaces in name",
         "id": "abcdef56-1234-abcd-abcd-defabcdaedcb",
         "name": "example with spaces.pig",
         "tenant_id": "429ad8447c2d47bc8e0382d244e1d1df",
         "updated_at": None,
-        "url": "internal-db://abcdef56-1234-abcd-abcd-defabcdaedcb"
+        "url": "internal-db://abcdef56-1234-abcd-abcd-defabcdaedcb",
+        'is_public': False,
+        'is_protected': False
     }
 
     job_binary3_dict = {
-        "created_at": "2015-10-10 13:12:15.583631",
+        "created_at": "2015-10-10T13:12:15",
         "description": "Test Manila",
         "id": "abcdef56-1234-abcd-1345-defabcdaedcb",
         "name": "manilashared",
@@ -453,12 +510,12 @@ def data(TEST):
 
     # Jobs.
     job1_dict = {
-        "created_at": "2014-06-05 19:23:59.637165",
+        "created_at": "2014-06-05T19:23:59",
         "description": "",
         "id": "a077b851-46be-4ad7-93c3-2d83894546ef",
         "libs": [
             {
-                "created_at": "2014-06-05 19:23:42.742057",
+                "created_at": "2014-06-05T19:23:42",
                 "description": "",
                 "id": "ab140807-59f8-4235-b4f2-e03daf946256",
                 "name": "udf.jar",
@@ -469,7 +526,7 @@ def data(TEST):
         ],
         "mains": [
             {
-                "created_at": "2014-06-05 18:15:15.581285",
+                "created_at": "2014-06-05T18:15:15",
                 "description": "",
                 "id": "3f3a07ac-7d6f-49e8-8669-40b25ee891b7",
                 "name": "example.pig",
@@ -492,7 +549,7 @@ def data(TEST):
     # Job Executions.
     jobex1_dict = {
         "cluster_id": "ec9a0d28-5cfb-4028-a0b5-40afe23f1533",
-        "created_at": "2014-06-05 20:03:06.195937",
+        "created_at": "2014-06-05T20:03:06",
         "end_time": None,
         "id": "4b6c1cbf-c713-49d3-8025-808a87c514a6",
         "info": {
@@ -572,7 +629,7 @@ def data(TEST):
         "return_code": None,
         "start_time": "2014-06-05T16:03:32",
         "tenant_id": "429ad8447c2d47bc8e0382d244e1d1df",
-        "updated_at": "2014-06-05 20:03:46.438248",
+        "updated_at": "2014-06-05T20:03:46",
         "cluster_name_set": True,
         "job_name_set": True,
         "cluster_name": "cluster-1",

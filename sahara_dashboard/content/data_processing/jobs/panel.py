@@ -14,12 +14,11 @@
 from django.utils.translation import ugettext_lazy as _
 
 import horizon
-
 from openstack_dashboard.dashboards.project import dashboard
 
 
 class JobsPanel(horizon.Panel):
-    name = _("Job Templates")
+    name = _("Jobs")
     slug = 'data_processing.jobs'
     permissions = (('openstack.services.data-processing',
                     'openstack.services.data_processing'),)

@@ -10,18 +10,20 @@
 # implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import logging
 
 from django.core.exceptions import ValidationError
 from django.utils import safestring
 from django.utils.translation import ugettext_lazy as _
-
 import six
 
+from horizon import exceptions
 from horizon import forms
 from horizon import workflows
-
 from openstack_dashboard.api import network
+
+from sahara_dashboard.api import sahara as saharaclient
 
 LOG = logging.getLogger(__name__)
 
@@ -89,9 +91,7 @@ def _create_step_action(name, title, parameters, advanced_fields=None,
             class_fields[ad_field_name] = ad_field_value
 
     action_meta = type('Meta', (object, ),
-                       dict(help_text_template=("project"
-                                                "/data_processing."
-                                                "nodegroup_templates/"
+                       dict(help_text_template=("nodegroup_templates/"
                                                 "_fields_help.html")))
 
     class_fields['Meta'] = action_meta
@@ -217,6 +217,30 @@ def clean_node_group(node_group):
             node_group_copy.pop(key)
 
     return node_group_copy
+
+
+def populate_image_choices(self, request, context, empty_choice=False):
+    try:
+        all_images = saharaclient.image_list(request)
+
+        plugin, hadoop_version = get_plugin_and_hadoop_version(request)
+
+        details = saharaclient.plugin_get_version_details(request,
+                                                          plugin,
+                                                          hadoop_version)
+        choices = [(image.id, image.name) for image in all_images
+                   if (set(details.required_image_tags).
+                       issubset(set(image.tags)))]
+    except Exception:
+        exceptions.handle(request,
+                          _("Unable to fetch image choices."))
+        choices = []
+    if empty_choice:
+        choices = [(None, _('No image specified'))] + choices
+    if not choices:
+        choices.append(("", _("No Images Available")))
+
+    return choices
 
 
 class PluginAndVersionMixin(object):

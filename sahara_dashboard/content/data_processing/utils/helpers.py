@@ -12,10 +12,11 @@
 # limitations under the License.
 
 from django.utils.translation import ugettext_lazy as _
+from oslo_utils import timeutils
+import six
 
 import sahara_dashboard.content.data_processing. \
     utils.workflow_helpers as work_helpers
-
 from sahara_dashboard.api import sahara as saharaclient
 
 
@@ -89,7 +90,8 @@ class Helpers(object):
 
     def is_from_guide(self):
         referer = self.request.environ.get("HTTP_REFERER")
-        if referer and "/wizard/" in referer:
+        if referer and ("/cluster_guide" in referer
+                        or "/jobex_guide" in referer):
             return True
         return False
 
@@ -118,6 +120,30 @@ class Helpers(object):
         except Exception:
             return False
         return True
+
+    def get_duration(self, start_time, end_time=None):
+        """Calculates time delta between start and end timestamps
+
+        Calculates the delta between given timestamps. The arguments should
+        be provided as strings. The format should match %Y-%m-%dT%H:%M:%S
+        which is returned by default from Sahara API.
+        The end time may be skipped. In this case datetime.now() will be used.
+
+        :param start_time: Start timestamp.
+        :param end_time: End timestamp. Optional.
+        :return: The delta between timestamps.
+        """
+
+        start_datetime = timeutils.parse_isotime(start_time)
+
+        if end_time:
+            end_datetime = timeutils.parse_isotime(end_time)
+        else:
+            end_datetime = timeutils.utcnow(True)
+            end_datetime = end_datetime.replace(microsecond=0)
+
+        return six.text_type(end_datetime - start_datetime)
+
 
 # Map needed because switchable fields need lower case
 # and our server is expecting upper case.  We will be
