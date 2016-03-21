@@ -1,15 +1,4 @@
-sahara-dashboard (4.0.0~b3-1) experimental; urgency=medium
-
-  [ Ondřej Nový ]
-  * Fixed VCS URLs (https).
-
-  [ Thomas Goirand ]
-  * New upstream release.
-  * Fixed (build-)depends for this release.
-
- -- Thomas Goirand <zigo@debian.org>  Thu, 17 Mar 2016 22:41:41 +0100
-
-sahara-dashboard (4.0.0~b2-1) experimental; urgency=medium
+sahara-dashboard (4.0.0~rc1-1) experimental; urgency=medium
 
   * Initial release. (Closes: #812836)
 
