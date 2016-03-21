@@ -3,64 +3,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-02-18 14:31+0000\n"
+"POT-Creation-Date: 2016-03-07 20:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-02-18 07:08+0000\n"
+"PO-Revision-Date: 2016-03-11 07:03+0000\n"
 "Last-Translator: Akihiro Motoki <amotoki@gmail.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Zanata 3.7.3\n"
 
-msgid ""
-"\n"
-"                  In order to run a Data Processing job, you need to make\n"
-"                  the files for your program available to the\n"
-"                  Data Processing system, define where the input and output\n"
-"                  need to go and create a Job Template that describes\n"
-"                  how to run your job.  Each of those steps can be done\n"
-"                  manually or you can follow this guide to help take you\n"
-"                  through the steps to run a job on an existing cluster.\n"
-"            "
-msgstr ""
-"\n"
-"データ処理のジョブを実行するには、\n"
-"データ処理システムに対して提供することのできる\n"
-"プログラムのファイルを作成し、\n"
-"入力先/出力先を定義してジョブの実行方法を説明する\n"
-"ジョブテンプレートを作成する必要があります。\n"
-"これらの各ステップは、手動で実行することができます。\n"
-"もしくは、このガイドに従って既存のクラスターで\n"
-"ジョブを実行するステップを段階的に進めることもできます。"
-
-msgid ""
-"\n"
-"                 Each of the Data Processing frameworks require a cluster of "
-"machines\n"
-"                 in order to do the work they are assigned.  A cluster is\n"
-"                 formed by creating a set of Node Group Templates, "
-"combining\n"
-"                 those into a Cluster Template and then launching a "
-"Cluster.\n"
-"                 You can do each of those steps manually, or you can follow\n"
-"                 this guide to help take you through the steps of\n"
-"                 Cluster creation.\n"
-"             "
-msgstr ""
-"\n"
-"各データ処理フレームワークが割り当てられた作業を処理するには、\n"
-"マシンのクラスターが必要です。\n"
-"クラスターを編成するには、ノードグループテンプレートのセットを作成し、\n"
-"それらをクラスターテンプレートに統合してからクラスターを起動します。\n"
-"これらのステップはそれぞれ手動で実行することができます。\n"
-"もしくは、このガイドに従ってクラスターの作成ステップを\n"
-"段階的に進めることもできます。\n"
-"             "
-
 msgid " Done"
 msgstr " 完了"
+
+msgid " or "
+msgstr "または"
 
 #, python-format
 msgid "%(conf_name)s: %(conf_val)s"
@@ -141,6 +99,9 @@ msgstr "ベースイメージ"
 
 msgid "Cancel"
 msgstr "取り消し"
+
+msgid "Checking"
+msgstr "確認中"
 
 msgid "Choose"
 msgstr "選択"
@@ -236,9 +197,6 @@ msgstr "クラスター作成のガイド"
 msgid "Cluster Events"
 msgstr "クラスターのイベント"
 
-msgid "Cluster Guide"
-msgstr "クラスターのガイド"
-
 msgid "Cluster Instances"
 msgstr "クラスターインスタンス"
 
@@ -271,8 +229,14 @@ msgstr "既存のクラスターテンプレートを使ってクラスターを
 msgid "Cluster configurations are not specified"
 msgstr "クラスター設定は指定されていません"
 
+msgid "Cluster health checks"
+msgstr "クラスターの動作状況チェック"
+
 msgid "Cluster provision steps"
 msgstr "クラスターのプロビジョニング手順"
+
+msgid "Cluster share update failed."
+msgstr "クラスターの共有の更新に失敗しました。"
 
 msgid "Cluster template creation failed"
 msgstr "クラスターテンプレートの作成に失敗しました"
@@ -333,6 +297,9 @@ msgstr "ジョブテンプレートを作成できません"
 
 msgid "Could not launch job"
 msgstr "ジョブを起動できません"
+
+msgid "Could not update cluster shares"
+msgstr "クラスターの共有を更新できませんでした"
 
 msgid "Could not update data source"
 msgstr "データソースを更新できませんでした"
@@ -397,6 +364,10 @@ msgstr "このアベイラビリティーゾーンにボリュームを作成し
 msgid "Created"
 msgstr "作成時刻"
 
+msgctxt "Created time"
+msgid "Created"
+msgstr "作成時刻"
+
 #, python-format
 msgid "Created Cluster Template %s"
 msgstr "クラスターテンプレート %s を作成しました"
@@ -416,9 +387,6 @@ msgstr "現在の種別:"
 
 msgid "Data Processing"
 msgstr "データ処理"
-
-msgid "Data Processing Guides"
-msgstr "データ処理のガイド"
 
 msgid "Data Processing Plugin Details"
 msgstr "データ処理プラグインの詳細"
@@ -583,6 +551,7 @@ msgstr "テンプレートの編集"
 msgid "Enable Swift Paths"
 msgstr "Swift のパス指定を有効にする"
 
+msgctxt "End time"
 msgid "Ended"
 msgstr "終了時刻"
 
@@ -616,6 +585,9 @@ msgstr "内部バイナリーの一覧を取得できません"
 
 msgid "Failed to get list of internal binaries."
 msgstr "内部バイナリーの一覧を取得できません"
+
+msgid "Failed to get list of shares"
+msgstr "共有の一覧を取得できませんでした"
 
 msgid "Failed to update image."
 msgstr "イメージのアップロードに失敗しました。"
@@ -651,6 +623,13 @@ msgstr ""
 "があります。"
 
 msgid ""
+"For Data Sources on a Manila share, choose the share and enter the path "
+"relative to the share (example: /outputdir/myinputfile.txt)"
+msgstr ""
+"Manila の共有上のデータソースの場合、共有を選択し、共有上での相対パスを入力し"
+"てください (例: /outputdir/myinputfile.txt)"
+
+msgid ""
 "For MapReduce or Java Action jobs, \"mains\" are not applicable.  You are "
 "required to add one\n"
 "  or more \"libs\" for these jobs."
@@ -684,11 +663,11 @@ msgstr "ガイド付きクラスター作成"
 msgid "Guided Job Execution"
 msgstr "ガイド付きジョブ実行"
 
-msgid "Guides"
-msgstr "ガイド"
-
 msgid "HDFS placement"
 msgstr "HDFS 置き場"
+
+msgid "Health"
+msgstr "動作状況"
 
 msgid "Hide full configuration"
 msgstr "詳細設定を表示しない"
@@ -698,6 +677,17 @@ msgstr "Hive"
 
 msgid "ID"
 msgstr "ID"
+
+#, python-format
+msgid ""
+"If selected, %s will be protected from modifications until this will be "
+"unselected"
+msgstr ""
+"このオプションを選択すると、 %s は選択を解除するまでは変更できなくなります。"
+
+#, python-format
+msgid "If selected, %s will be shared across the tenants"
+msgstr "このオプションを選択すると、 %s はプロジェクト間で共有されます。"
 
 msgid ""
 "If selected, instances of a cluster will be automatically configured during "
@@ -783,9 +773,6 @@ msgstr "ジョブバイナリー"
 
 msgid "Job Configuration"
 msgstr "ジョブ設定"
-
-msgid "Job Execution Guide"
-msgstr "ジョブ実行のガイド"
 
 msgid "Job Execution ID"
 msgstr "ジョブ実行 ID"
@@ -907,6 +894,9 @@ msgstr "メイン"
 msgid "Management IP"
 msgstr "管理 IP"
 
+msgid "Manila share"
+msgstr "Manila 共有"
+
 msgid "MapReduce"
 msgstr "MapReduce"
 
@@ -990,6 +980,9 @@ msgstr "設定なし"
 
 msgid "No description"
 msgstr "説明なし"
+
+msgid "No image specified"
+msgstr "イメージが指定されていません。"
 
 msgid "No images available."
 msgstr "利用可能なイメージがありません。"
@@ -1115,6 +1108,9 @@ msgstr "パスワード"
 msgid "Path"
 msgstr "パス"
 
+msgid "Path on share"
+msgstr "共有上のパス"
+
 msgid "Persist cluster after job exit"
 msgstr "ジョブ終了後もクラスターを保持する"
 
@@ -1156,6 +1152,12 @@ msgstr "プロキシーゲートウェイ"
 
 msgid "Public"
 msgstr "パブリック"
+
+msgid "Read only"
+msgstr "読み込み専用"
+
+msgid "Read/Write"
+msgstr "読み書き両用"
 
 msgid "Reducer"
 msgstr "Reducer"
@@ -1245,6 +1247,9 @@ msgstr "イメージを選択してください"
 msgid "Select Node Group Processes"
 msgstr "ノードグループプロセスを選択してください"
 
+msgid "Select Shares"
+msgstr "共有の選択"
+
 msgid "Select a Node Group Template to add:"
 msgstr "追加するノードグループテンプレートを選択してください:"
 
@@ -1285,6 +1290,12 @@ msgstr ""
 msgid "Select property name"
 msgstr "プロパティー名を選択してください"
 
+msgid "Select the manila shares for this cluster"
+msgstr "このクラスター用の manila の共有を選択してください"
+
+msgid "Select the manila shares for this node group"
+msgstr "このノードグループ用の manila の共有を選択してください"
+
 msgid "Select the storage type for your job binary."
 msgstr "ジョブバイナリーのストレージ種別を選択してください。"
 
@@ -1321,6 +1332,9 @@ msgstr "サービス設定"
 msgid "Share"
 msgstr "共有"
 
+msgid "Shares"
+msgstr "共有"
+
 msgid "Shell"
 msgstr "シェル"
 
@@ -1346,14 +1360,26 @@ msgstr ""
 "指定されたユーザー名は、設定を適用したり、インスタンス上のプロセスを管理した"
 "りするのに使用されます。"
 
+msgid "Start Verification"
+msgid_plural "Start Verifications"
+msgstr[0] "検証の開始"
+
+msgctxt "Start time"
 msgid "Started"
 msgstr "開始時刻"
+
+msgid "Started Verification"
+msgid_plural "Started Verifications"
+msgstr[0] "検証を開始しました"
 
 msgid "Started at"
 msgstr "開始時刻"
 
 msgid "Status"
 msgstr "ステータス"
+
+msgid "Status description"
+msgstr "ステータスの詳細"
 
 msgid "Step Description"
 msgstr "説明"
@@ -1372,6 +1398,13 @@ msgstr "ストリーミング MapReduce"
 
 msgid "String"
 msgstr "文字列"
+
+msgid ""
+"Substitute data source objects for URLs of the form datasource://name or "
+"uuid."
+msgstr ""
+"データソースオブジェクトを datasource://名前またはUUID の形式の URL に置き換"
+"えます。"
 
 msgctxt "Current status of a Job"
 msgid "Succeeded"
@@ -1476,6 +1509,9 @@ msgstr ""
 "希望するクラスター種別に適切なオプションのみに\n"
 "集中することができます。"
 
+msgid "The value of shares must be a list of values"
+msgstr "共有の値はリスト値でなければいけません"
+
 msgid "This Cluster Template will be created for:"
 msgstr "以下のプラグイン用のクラスターテンプレートを作成します。"
 
@@ -1503,6 +1539,10 @@ msgstr "ジョブ用の新しいクラスターを作成できません"
 msgid "Unable to create the cluster"
 msgstr "クラスターを作成できません"
 
+#, python-format
+msgid "Unable to fetch Base Image with id: %s."
+msgstr "ID %s のベースイメージを取得できません。"
+
 msgid "Unable to fetch available images."
 msgstr "利用可能なイメージ一覧を取得できません。"
 
@@ -1521,8 +1561,14 @@ msgstr "サイズ調整を行うクラスターを取得できません"
 msgid "Unable to fetch cluster to scale."
 msgstr "サイズ調整を行うクラスターを取得できません"
 
+msgid "Unable to fetch cluster."
+msgstr "クラスターを取得できません。"
+
 msgid "Unable to fetch clusters."
 msgstr "クラスターの一覧を取得できません"
+
+msgid "Unable to fetch data source list"
+msgstr "データソースの一覧を取得できません"
 
 msgid "Unable to fetch data sources."
 msgstr "データソースの一覧を取得できません"
@@ -1539,6 +1585,9 @@ msgstr "イメージの選択肢を取得できません。"
 msgid "Unable to fetch instance details."
 msgstr "インスタンスの詳細を取得できません。"
 
+msgid "Unable to fetch job binary list"
+msgstr "ジョブバイナリーの一覧を取得できません"
+
 msgid "Unable to fetch job binary list."
 msgstr "ジョブバイナリーの一覧を取得できません"
 
@@ -1546,8 +1595,11 @@ msgstr "ジョブバイナリーの一覧を取得できません"
 msgid "Unable to fetch job binary: %(exc)s"
 msgstr "ジョブバイナリーを取得できません: %(exc)s"
 
-msgid "Unable to fetch job executions."
-msgstr "ジョブ実行の一覧を取得できません。"
+msgid "Unable to fetch job list"
+msgstr "ジョブの一覧を取得できません"
+
+msgid "Unable to fetch job template list"
+msgstr "ジョブテンプレートの一覧を取得できません"
 
 msgid "Unable to fetch jobs."
 msgstr "ジョブ一覧を取得できません"
@@ -1558,11 +1610,17 @@ msgstr "キーペアの選択肢を取得できません"
 msgid "Unable to fetch node group details."
 msgstr "ノードグループの詳細を取得できません。"
 
+msgid "Unable to fetch node group template list"
+msgstr "ノードグループテンプレートの一覧を取得できません"
+
 msgid "Unable to fetch node group template list."
 msgstr "ノードグループテンプレートの一覧を取得できません"
 
 msgid "Unable to fetch plugin details."
 msgstr "プラグインの詳細を取得できません"
+
+msgid "Unable to fetch plugin list"
+msgstr "プラグインの一覧を取得できません"
 
 msgid "Unable to fetch plugin list."
 msgstr "プラグイン一覧を取得できません"
@@ -1661,9 +1719,6 @@ msgstr "ジョブ種別を設定できません"
 msgid "Unable to set node group template"
 msgstr "ノードグループテンプレートを設定できません"
 
-msgid "Unable to show guides"
-msgstr "ガイドを表示できません"
-
 msgid "Unable to update job binary"
 msgstr "ジョブバイナリーを更新できません。"
 
@@ -1693,6 +1748,12 @@ msgstr[0] "イメージの登録を削除しました"
 msgid "Update"
 msgstr "更新"
 
+msgid "Update Cluster Shares"
+msgstr "クラスターの共有の更新"
+
+msgid "Update Shares"
+msgstr "共有の更新"
+
 msgid "Updated"
 msgstr "更新日時"
 
@@ -1713,6 +1774,9 @@ msgstr "新しいファイルをアップロード"
 
 msgid "Url"
 msgstr "URL"
+
+msgid "Use Data Source Substitution for Names and UUIDs"
+msgstr "データソースから名前や UUID への置き換え"
 
 msgid "Use HBase Common library"
 msgstr "HBase 共通ライブラリーを使用"
