@@ -1,0 +1,201 @@
+Description: request.REQUEST is removed
+ This is a Django 1.9 support patch.
+Author: Thomas Goirand <zigo@debian.org>
+Forwarded: no
+Last-Update: 2016-03-21
+
+--- sahara-dashboard-4.0.0~rc1.orig/sahara_dashboard/content/data_processing/clusters/cluster_templates/workflows/create.py
++++ sahara-dashboard-4.0.0~rc1/sahara_dashboard/content/data_processing/clusters/cluster_templates/workflows/create.py
+@@ -181,11 +181,11 @@ class ConfigureNodegroupsAction(workflow
+         super(ConfigureNodegroupsAction, self). \
+             __init__(request, *args, **kwargs)
+ 
+-        plugin = request.REQUEST.get("plugin_name")
+-        version = request.REQUEST.get("hadoop_version")
++        plugin = request.GET.get("plugin_name")
++        version = request.GET.get("hadoop_version")
+         if plugin and not version:
+             version_name = plugin + "_version"
+-            version = request.REQUEST.get(version_name)
++            version = request.GET.get(version_name)
+ 
+         if not plugin or not version:
+             self.templates = saharaclient.nodegroup_template_find(request)
+@@ -193,13 +193,13 @@ class ConfigureNodegroupsAction(workflow
+             self.templates = saharaclient.nodegroup_template_find(
+                 request, plugin_name=plugin, hadoop_version=version)
+ 
+-        deletable = request.REQUEST.get("deletable", dict())
++        deletable = request.GET.get("deletable", dict())
+ 
+         request_source = None
+         if 'forms_ids' in request.POST:
+                 request_source = request.POST
+-        elif 'forms_ids' in request.REQUEST:
+-                request_source = request.REQUEST
++        elif 'forms_ids' in request.GET:
++                request_source = request.GET
+         if request_source:
+             self.groups = []
+             for id in json.loads(request_source['forms_ids']):
+--- sahara-dashboard-4.0.0~rc1.orig/sahara_dashboard/content/data_processing/clusters/clusters/workflows/create.py
++++ sahara-dashboard-4.0.0~rc1/sahara_dashboard/content/data_processing/clusters/clusters/workflows/create.py
+@@ -148,9 +148,9 @@ class GeneralConfigAction(workflows.Acti
+         # cluster_template_id comes from cluster templates table, when
+         # Create Cluster from template is clicked there
+         selected_template_name = None
+-        if request.REQUEST.get("cluster_template_name"):
++        if request.GET.get("cluster_template_name"):
+             selected_template_name = (
+-                request.REQUEST.get("cluster_template_name"))
++                request.GET.get("cluster_template_name"))
+         if selected_template_name:
+             for template in templates:
+                 if template.name == selected_template_name:
+@@ -158,7 +158,7 @@ class GeneralConfigAction(workflows.Acti
+                     break
+         else:
+             selected_template_id = (
+-                request.REQUEST.get("cluster_template_id", None))
++                request.GET.get("cluster_template_id", None))
+ 
+         for template in templates:
+             if template.id == selected_template_id:
+--- sahara-dashboard-4.0.0~rc1.orig/sahara_dashboard/content/data_processing/clusters/nodegroup_templates/workflows/create.py
++++ sahara-dashboard-4.0.0~rc1/sahara_dashboard/content/data_processing/clusters/nodegroup_templates/workflows/create.py
+@@ -185,11 +185,11 @@ class GeneralConfigAction(workflows.Acti
+         for param in node_parameters:
+             self.fields[param.name] = workflow_helpers.build_control(param)
+ 
+-        if request.REQUEST.get("guide_template_type"):
++        if request.GET.get("guide_template_type"):
+             self.fields["guide_template_type"] = forms.CharField(
+                 required=False,
+                 widget=forms.HiddenInput(),
+-                initial=request.REQUEST.get("guide_template_type"))
++                initial=request.GET.get("guide_template_type"))
+ 
+         try:
+             volume_types = cinder.volume_type_list(request)
+--- sahara-dashboard-4.0.0~rc1.orig/sahara_dashboard/content/data_processing/jobs/job_templates/views.py
++++ sahara-dashboard-4.0.0~rc1/sahara_dashboard/content/data_processing/jobs/job_templates/views.py
+@@ -83,8 +83,8 @@ class LaunchJobView(workflows.WorkflowVi
+ 
+     def get(self, request, *args, **kwargs):
+         if request.is_ajax():
+-            if request.REQUEST.get("json", None):
+-                job_id = request.REQUEST.get("job_id")
++            if request.GET.get("json", None):
++                job_id = request.GET.get("job_id")
+                 job_type = saharaclient.job_get(request, job_id).type
+                 return http.HttpResponse(json.dumps({"job_type": job_type}),
+                                          content_type='application/json')
+--- sahara-dashboard-4.0.0~rc1.orig/sahara_dashboard/content/data_processing/jobs/job_templates/workflows/create.py
++++ sahara-dashboard-4.0.0~rc1/sahara_dashboard/content/data_processing/jobs/job_templates/workflows/create.py
+@@ -106,9 +106,9 @@ class GeneralConfigAction(workflows.Acti
+     def __init__(self, request, context, *args, **kwargs):
+         super(GeneralConfigAction,
+               self).__init__(request, context, *args, **kwargs)
+-        if request.REQUEST.get("guide_job_type"):
++        if request.GET.get("guide_job_type"):
+             self.fields["job_type"].initial = (
+-                request.REQUEST.get("guide_job_type").lower())
++                request.GET.get("guide_job_type").lower())
+ 
+     def populate_job_type_choices(self, request, context):
+         choices = []
+@@ -156,8 +156,8 @@ class ConfigureInterfaceArgumentsAction(
+         request_source = None
+         if 'argument_ids' in request.POST:
+                 request_source = request.POST
+-        elif 'argument_ids' in request.REQUEST:
+-                request_source = request.REQUEST
++        elif 'argument_ids' in request.GET:
++                request_source = request.GET
+         if request_source:
+             self.arguments = []
+             for id in json.loads(request_source['argument_ids']):
+--- sahara-dashboard-4.0.0~rc1.orig/sahara_dashboard/content/data_processing/jobs/job_templates/workflows/launch.py
++++ sahara-dashboard-4.0.0~rc1/sahara_dashboard/content/data_processing/jobs/job_templates/workflows/launch.py
+@@ -56,14 +56,14 @@ class JobExecutionGeneralConfigAction(wo
+                                                               *args,
+                                                               **kwargs)
+ 
+-        if request.REQUEST.get("job_id", None) is None:
++        if request.GET.get("job_id", None) is None:
+             self.fields["job"] = forms.ChoiceField(
+                 label=_("Job"))
+             self.fields["job"].choices = self.populate_job_choices(request)
+         else:
+             self.fields["job"] = forms.CharField(
+                 widget=forms.HiddenInput(),
+-                initial=request.REQUEST.get("job_id", None))
++                initial=request.GET.get("job_id", None))
+ 
+     def populate_job_input_choices(self, request, context):
+         return self.get_data_source_choices(request, context)
+@@ -225,7 +225,7 @@ class JobConfigAction(workflows.Action):
+ 
+     def __init__(self, request, *args, **kwargs):
+         super(JobConfigAction, self).__init__(request, *args, **kwargs)
+-        job_ex_id = request.REQUEST.get("job_execution_id")
++        job_ex_id = request.GET.get("job_execution_id")
+         if job_ex_id is not None:
+             job_ex = saharaclient.job_execution_get(request, job_ex_id)
+             job = saharaclient.job_get(request, job_ex.job_id)
+@@ -289,7 +289,7 @@ class JobConfigAction(workflows.Action):
+         return cleaned_data
+ 
+     def populate_property_name_choices(self, request, context):
+-        job_id = request.REQUEST.get("job_id") or request.REQUEST.get("job")
++        job_id = request.GET.get("job_id") or request.GET.get("job")
+         job_type = saharaclient.job_get(request, job_id).type
+         job_configs = (
+             saharaclient.job_get_configs(request, job_type).job_config)
+@@ -443,7 +443,7 @@ class JobExecutionInterfaceConfigAction(
+         interface = job.interface or []
+         interface_args = {}
+ 
+-        job_ex_id = request.REQUEST.get("job_execution_id")
++        job_ex_id = request.GET.get("job_execution_id")
+         if job_ex_id is not None:
+             job_ex = saharaclient.job_execution_get(request, job_ex_id)
+             job = saharaclient.job_get(request, job_ex.job_id)
+@@ -534,7 +534,7 @@ class SelectHadoopPluginAction(t_flows.S
+             label=_("Job params"),
+             widget=forms.HiddenInput(attrs={"class": "hidden_create_field"}))
+ 
+-        job_ex_id = request.REQUEST.get("job_execution_id")
++        job_ex_id = request.GET.get("job_execution_id")
+         if job_ex_id is not None:
+             self.fields["job_execution_id"] = forms.ChoiceField(
+                 label=_("Job Execution ID"),
+--- sahara-dashboard-4.0.0~rc1.orig/sahara_dashboard/content/data_processing/utils/anti_affinity.py
++++ sahara-dashboard-4.0.0~rc1/sahara_dashboard/content/data_processing/utils/anti_affinity.py
+@@ -41,9 +41,9 @@ def populate_anti_affinity_choices(self,
+             for process in processes:
+                 process_choices.append((process, process))
+ 
+-        cluster_template_id = request.REQUEST.get("cluster_template_id", None)
++        cluster_template_id = request.GET.get("cluster_template_id", None)
+         if cluster_template_id is None:
+-            selected_processes = request.REQUEST.get("aa_groups", [])
++            selected_processes = request.GET.get("aa_groups", [])
+         else:
+             cluster_template = (
+                 sahara.cluster_templates.get(cluster_template_id))
+--- sahara-dashboard-4.0.0~rc1.orig/sahara_dashboard/content/data_processing/utils/workflow_helpers.py
++++ sahara-dashboard-4.0.0~rc1/sahara_dashboard/content/data_processing/utils/workflow_helpers.py
+@@ -202,9 +202,9 @@ def get_security_groups(request, securit
+ def get_plugin_and_hadoop_version(request):
+     plugin_name = None
+     hadoop_version = None
+-    if request.REQUEST.get("plugin_name"):
+-        plugin_name = request.REQUEST["plugin_name"]
+-        hadoop_version = request.REQUEST["hadoop_version"]
++    if request.GET.get("plugin_name"):
++        plugin_name = request.GET["plugin_name"]
++        hadoop_version = request.GET["hadoop_version"]
+     return (plugin_name, hadoop_version)
+ 
+ 
