@@ -148,7 +148,7 @@ Last-Update: 2016-03-21
  
      def populate_property_name_choices(self, request, context):
 -        job_id = request.REQUEST.get("job_id") or request.REQUEST.get("job")
-+        job_id = request.GET.get("job_id") or request.GET.get("job")
++        job_id = request.POST.get("job_id") or request.POST.get("job")
          job_type = saharaclient.job_get(request, job_id).type
          job_configs = (
              saharaclient.job_get_configs(request, job_type).job_config)
