@@ -1,4 +1,4 @@
-sahara-dashboard (4.0.0~rc1-1) experimental; urgency=medium
+sahara-dashboard (4.0.0~rc2-1) unstable; urgency=medium
 
   * Initial release. (Closes: #812836)
 
