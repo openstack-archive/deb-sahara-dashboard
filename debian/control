@@ -37,7 +37,7 @@ Build-Depends-Indep: openstack-dashboard (>= 9.0.0~rc1),
                      python-xvfbwrapper (>= 0.1.3),
                      subunit,
                      testrepository,
-Standards-Version: 3.9.7
+Standards-Version: 3.9.8
 Vcs-Git: https://anonscm.debian.org/git/openstack/sahara-dashboard.git
 Vcs-Browser: https://anonscm.debian.org/cgit/openstack/sahara-dashboard.git/
 Homepage: https://github.com/stackforge/sahara-dashboard
