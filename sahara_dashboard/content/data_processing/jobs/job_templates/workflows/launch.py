@@ -27,6 +27,7 @@ import sahara_dashboard.content.data_processing. \
     clusters.clusters.workflows.create as c_flow
 from sahara_dashboard.content.data_processing.utils \
     import acl as acl_utils
+from sahara_dashboard.content.data_processing.utils import helpers
 import sahara_dashboard.content.data_processing. \
     utils.workflow_helpers as whelpers
 
@@ -55,15 +56,15 @@ class JobExecutionGeneralConfigAction(workflows.Action):
         super(JobExecutionGeneralConfigAction, self).__init__(request,
                                                               *args,
                                                               **kwargs)
-
-        if request.REQUEST.get("job_id", None) is None:
+        req = request.GET or request.POST
+        if req.get("job_id", None) is None:
             self.fields["job"] = forms.ChoiceField(
                 label=_("Job"))
             self.fields["job"].choices = self.populate_job_choices(request)
         else:
             self.fields["job"] = forms.CharField(
                 widget=forms.HiddenInput(),
-                initial=request.REQUEST.get("job_id", None))
+                initial=req.get("job_id", None))
 
     def populate_job_input_choices(self, request, context):
         return self.get_data_source_choices(request, context)
@@ -119,10 +120,11 @@ class JobExecutionExistingGeneralConfigAction(JobExecutionGeneralConfigAction):
             clusters = []
             exceptions.handle(request,
                               _("Unable to fetch clusters."))
-
-        choices = [(cluster.id, cluster.name)
-                   for cluster in clusters]
-
+        choices = [(cl.id, "%s %s" % (cl.name,
+                                      helpers.ALLOWED_STATUSES.get(cl.status)))
+                   for cl in clusters if cl.status in helpers.ALLOWED_STATUSES]
+        if not choices:
+            choices = [(None, _("No clusters available"))]
         return choices
 
     class Meta(object):
@@ -225,7 +227,8 @@ class JobConfigAction(workflows.Action):
 
     def __init__(self, request, *args, **kwargs):
         super(JobConfigAction, self).__init__(request, *args, **kwargs)
-        job_ex_id = request.REQUEST.get("job_execution_id")
+        req = request.GET or request.POST
+        job_ex_id = req.get("job_execution_id")
         if job_ex_id is not None:
             job_ex = saharaclient.job_execution_get(request, job_ex_id)
             job = saharaclient.job_get(request, job_ex.job_id)
@@ -289,7 +292,8 @@ class JobConfigAction(workflows.Action):
         return cleaned_data
 
     def populate_property_name_choices(self, request, context):
-        job_id = request.REQUEST.get("job_id") or request.REQUEST.get("job")
+        req = request.GET or request.POST
+        job_id = req.get("job_id") or req.get("job")
         job_type = saharaclient.job_get(request, job_id).type
         job_configs = (
             saharaclient.job_get_configs(request, job_type).job_config)
@@ -442,8 +446,8 @@ class JobExecutionInterfaceConfigAction(workflows.Action):
         job = saharaclient.job_get(request, job_id)
         interface = job.interface or []
         interface_args = {}
-
-        job_ex_id = request.REQUEST.get("job_execution_id")
+        req = request.GET or request.POST
+        job_ex_id = req.get("job_execution_id")
         if job_ex_id is not None:
             job_ex = saharaclient.job_execution_get(request, job_ex_id)
             job = saharaclient.job_get(request, job_ex.job_id)
@@ -512,11 +516,11 @@ class LaunchJob(workflows.Workflow):
         return True
 
 
-class SelectHadoopPluginAction(t_flows.SelectPluginAction):
+class SelectPluginForJobLaunchAction(t_flows.SelectPluginAction):
     def __init__(self, request, *args, **kwargs):
-        super(SelectHadoopPluginAction, self).__init__(request,
-                                                       *args,
-                                                       **kwargs)
+        super(SelectPluginForJobLaunchAction, self).__init__(request,
+                                                             *args,
+                                                             **kwargs)
         self.fields["job_id"] = forms.ChoiceField(
             label=_("Plugin name"),
             initial=request.GET.get("job_id") or request.POST.get("job_id"),
@@ -533,8 +537,8 @@ class SelectHadoopPluginAction(t_flows.SelectPluginAction):
         self.fields["job_params"] = forms.ChoiceField(
             label=_("Job params"),
             widget=forms.HiddenInput(attrs={"class": "hidden_create_field"}))
-
-        job_ex_id = request.REQUEST.get("job_execution_id")
+        req = request.GET or request.POST
+        job_ex_id = req.get("job_execution_id")
         if job_ex_id is not None:
             self.fields["job_execution_id"] = forms.ChoiceField(
                 label=_("Job Execution ID"),
@@ -562,7 +566,7 @@ class SelectHadoopPluginAction(t_flows.SelectPluginAction):
 
 
 class SelectHadoopPlugin(workflows.Step):
-    action_class = SelectHadoopPluginAction
+    action_class = SelectPluginForJobLaunchAction
 
 
 class ChosePluginVersion(workflows.Workflow):

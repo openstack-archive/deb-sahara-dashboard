@@ -1,14 +1,13 @@
-# Ian Y. Choi <ianyrchoi@gmail.com>, 2016. #zanata
-# SeYeon Lee <sy_lee@kr.ibm.com>, 2016. #zanata
+# Andreas Jaeger <jaegerandi@gmail.com>, 2016. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-07 20:43+0000\n"
+"Project-Id-Version: sahara-dashboard 5.0.0.0b2.dev23\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/openstack-i18n/\n"
+"POT-Creation-Date: 2016-06-17 21:09+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-03-18 03:55+0000\n"
+"PO-Revision-Date: 2016-04-07 09:31+0000\n"
 "Last-Translator: SeYeon Lee <sy_lee@kr.ibm.com>\n"
 "Language-Team: Korean (South Korea)\n"
 "Language: ko-KR\n"
@@ -63,14 +62,8 @@ msgstr "추가"
 msgid "Add Node Group"
 msgstr "노드 그룹 추가"
 
-msgid "Add custom tag"
-msgstr "사용자 정의 태그 추가"
-
 msgid "Add libraries to your job template."
 msgstr "작업 템플릿에 라이브러리를 추가하십시오."
-
-msgid "Add plugin tags"
-msgstr "플러그인 태그 추가"
 
 msgid "Anti-affinity enabled for"
 msgstr "Anti-affinity 사용"
@@ -820,6 +813,7 @@ msgstr "실행"
 msgid "Launch Cluster"
 msgstr "클러스터 실행"
 
+#, fuzzy
 msgid "Launch Job"
 msgid_plural "Launch Jobs"
 msgstr[0] "작업 실행"
@@ -1157,10 +1151,6 @@ msgstr "Reducer"
 msgid "Register Image"
 msgstr "이미지 등록"
 
-msgid ""
-"Register tags required for the Plugin with specified Data Processing Version"
-msgstr "지정된 데이터 프로세싱 버전으로 플러그인에 필요한 태그 등록"
-
 msgid "Relaunch On Existing Cluster"
 msgstr "기존 클러스터에서 재실행"
 
@@ -1407,17 +1397,6 @@ msgstr "Swift"
 msgid "Tags"
 msgstr "태그"
 
-msgid ""
-"Tags are used for filtering images suitable for each plugin and each Data "
-"Processing version.\n"
-"        To add required tags, select a plugin and a Data Processing version "
-"and click &quot;Add plugin tags&quot; button."
-msgstr ""
-"태그는 각 플러그인과 각 데이터 프로세싱 버전에 적합한 이미지를 필터링하는데 "
-"사용됩니다.\n"
-"        필수 태그를 추가하려면, 플러그인과 데이터 프로세싱 버전을 선택하고 "
-"&quot;플러그인 태그 추가&quot; 버튼을 누릅니다."
-
 msgid "Template"
 msgstr "템플릿"
 
@@ -1604,9 +1583,6 @@ msgstr "플러그인 세부 사항을 가져올 수 없습니다."
 
 msgid "Unable to fetch plugin list"
 msgstr "플러그인 목록을 가져올 수 없음"
-
-msgid "Unable to fetch plugin list."
-msgstr "플러그인 목록을 가져올 수 없습니다."
 
 msgid "Unable to fetch template object."
 msgstr "템플릿 오브젝트를 가져올 수 없습니다."

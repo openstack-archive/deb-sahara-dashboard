@@ -11,9 +11,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from pytz import timezone as ptz
+import six
+
+from django.template import defaultfilters as filters
+from django.utils import timezone
+from django.utils.translation import ugettext
 from django.utils.translation import ugettext_lazy as _
 from oslo_utils import timeutils
-import six
 
 import sahara_dashboard.content.data_processing. \
     utils.workflow_helpers as work_helpers
@@ -130,7 +135,7 @@ class Helpers(object):
         The end time may be skipped. In this case datetime.now() will be used.
 
         :param start_time: Start timestamp.
-        :param end_time: End timestamp. Optional.
+        :param end_time: (optional) End timestamp.
         :return: The delta between timestamps.
         """
 
@@ -143,6 +148,34 @@ class Helpers(object):
             end_datetime = end_datetime.replace(microsecond=0)
 
         return six.text_type(end_datetime - start_datetime)
+
+    def to_time_zone(self, datetime, tzone=None,
+                     input_fmt=None, localize=False):
+        """Changes given datetime string into given timezone
+
+        :param datetime: datetime string
+        :param tzone: (optional) timezone as a string (e.g. "Europe/Paris"),
+               by default it's the current django timezone
+        :param input_fmt: (optional) format of datetime param, if None then
+               the default Sahara API format (%Y-%m-%dT%H:%M:%S) will be used
+        :param localize: (optional) if True then format of datetime will be
+               localized according to current timezone else it will be in
+               the default Sahara API format (%Y-%m-%dT%H:%M:%S)
+        :return datetime string in the current django timezone
+        """
+
+        default_fmt = '%Y-%m-%dT%H:%M:%S'
+        if tzone is None:
+            tzone = self.request.session.get('django_timezone', 'UTC')
+        if input_fmt is None:
+            input_fmt = default_fmt
+        dt_in_utc = timezone.utc.localize(
+            timeutils.parse_strtime(datetime, input_fmt))
+        dt_in_zone = dt_in_utc.astimezone(ptz(tzone))
+        if localize:
+            return filters.date(dt_in_zone, "DATETIME_FORMAT")
+        else:
+            return dt_in_zone.strftime(default_fmt)
 
 
 # Map needed because switchable fields need lower case
@@ -158,3 +191,17 @@ JOB_TYPE_MAP = {"pig": [_("Pig"), "Pig"],
                                         "MapReduce.Streaming"],
                 "java": [_("Java"), "Java"],
                 "shell": [_("Shell"), "Shell"]}
+
+# Statuses of clusters that we can choose for job execution and
+# suitable messages that will be displayed next to the cluster name
+ALLOWED_STATUSES = {
+    "Active": "",
+    "Error": "(in error state)",
+}
+
+# Cluster status and suitable warning message that will be displayed
+# in the Job Launch form
+STATUS_MESSAGE_MAP = {
+    "Error": ugettext("You\'ve chosen a cluster that is in \'Error\' state. "
+                      "Appropriate execution of the job can't be guaranteed."),
+}

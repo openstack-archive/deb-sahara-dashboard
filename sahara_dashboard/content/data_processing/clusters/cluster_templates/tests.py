@@ -10,7 +10,6 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import base64
 import copy
 
 from django.core.urlresolvers import reverse
@@ -23,6 +22,7 @@ from openstack_dashboard import api as dash_api
 
 from sahara_dashboard import api
 from sahara_dashboard.test import helpers as test
+from sahara_dashboard import utils
 
 
 INDEX_URL = reverse('horizon:project:data_processing.clusters:'
@@ -32,7 +32,10 @@ DETAILS_URL = reverse(
 
 
 class DataProcessingClusterTemplateTests(test.TestCase):
-    @test.create_stubs({api.sahara: ('cluster_template_list',)})
+    @test.create_stubs({api.sahara: ('cluster_template_list',
+                                     'image_list',
+                                     'cluster_list',
+                                     'nodegroup_template_list')})
     def test_index(self):
         api.sahara.cluster_template_list(IsA(http.HttpRequest), {}) \
             .AndReturn(self.cluster_templates.list())
@@ -42,7 +45,8 @@ class DataProcessingClusterTemplateTests(test.TestCase):
         self.assertContains(res, 'Cluster Templates')
         self.assertContains(res, 'Name')
 
-    @test.create_stubs({api.sahara: ('cluster_template_get',),
+    @test.create_stubs({api.sahara: ('cluster_template_get',
+                                     'nodegroup_template_get'),
                         dash_api.nova: ('flavor_get',)})
     def test_details(self):
         flavor = self.flavors.first()
@@ -56,7 +60,8 @@ class DataProcessingClusterTemplateTests(test.TestCase):
         res = self.client.get(DETAILS_URL)
         self.assertTemplateUsed(res, 'horizon/common/_detail.html')
 
-    @test.create_stubs({api.sahara: ('cluster_template_get',
+    @test.create_stubs({api.sahara: ('client',
+                                     'cluster_template_get',
                                      'plugin_get_version_details',
                                      'nodegroup_template_find')})
     def test_copy(self):
@@ -100,7 +105,8 @@ class DataProcessingClusterTemplateTests(test.TestCase):
         self.assertRedirectsNoFollow(res, INDEX_URL)
         self.assertMessageCount(success=1)
 
-    @test.create_stubs({api.sahara: ('cluster_template_get',
+    @test.create_stubs({api.sahara: ('client',
+                                     'cluster_template_get',
                                      'cluster_template_update',
                                      'plugin_get_version_details',
                                      'nodegroup_template_find')})
@@ -142,7 +148,7 @@ class DataProcessingClusterTemplateTests(test.TestCase):
                       args=[ct.id])
 
         def serialize(obj):
-            return base64.urlsafe_b64encode(jsonutils.dump_as_bytes(obj))
+            return utils.serialize(jsonutils.dump_as_bytes(obj))
 
         res = self.client.post(
             url,
@@ -161,7 +167,6 @@ class DataProcessingClusterTemplateTests(test.TestCase):
              'count_1': 2,
              'serialized_1': serialize(ct.node_groups[1]),
              'forms_ids': "[0,1]",
-             'anti-affinity': ct.anti_affinity,
              })
 
         self.assertNoFormErrors(res)

@@ -202,10 +202,13 @@ def get_security_groups(request, security_group_ids):
 def get_plugin_and_hadoop_version(request):
     plugin_name = None
     hadoop_version = None
-    if request.REQUEST.get("plugin_name"):
-        plugin_name = request.REQUEST["plugin_name"]
-        hadoop_version = request.REQUEST["hadoop_version"]
-    return (plugin_name, hadoop_version)
+    # In some cases request contains valuable info in both GET and POST methods
+    req = request.GET.copy()
+    req.update(request.POST)
+    if req.get("plugin_name"):
+        plugin_name = req["plugin_name"]
+        hadoop_version = req["hadoop_version"]
+    return plugin_name, hadoop_version
 
 
 def clean_node_group(node_group):
@@ -251,7 +254,9 @@ class PluginAndVersionMixin(object):
         self.fields["plugin_name"] = forms.ChoiceField(
             label=_("Plugin Name"),
             choices=plugin_choices,
-            widget=forms.Select(attrs={"class": "plugin_name_choice"}))
+            widget=forms.Select(
+                attrs={"class": "plugin_name_choice switchable",
+                       'data-slug': 'pluginname'}))
 
         for plugin in plugins:
             field_name = plugin.name + "_version"
@@ -259,8 +264,10 @@ class PluginAndVersionMixin(object):
                 label=_("Version"),
                 choices=[(version, version) for version in plugin.versions],
                 widget=forms.Select(
-                    attrs={"class": "plugin_version_choice "
-                                    + field_name + "_choice"})
+                    attrs={"class": "plugin_version_choice switched "
+                           + field_name + "_choice",
+                           "data-switch-on": "pluginname",
+                           "data-pluginname-%s" % plugin.name: _("Version")})
             )
             self.fields[field_name] = choice_field
 

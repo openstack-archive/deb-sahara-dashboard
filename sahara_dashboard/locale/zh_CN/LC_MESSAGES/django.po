@@ -1,15 +1,14 @@
-# Gaoxiao Zhu <zhu.gaoxiao@h3c.com>, 2016. #zanata
-# Shengjing Zhu <zsj950618@gmail.com>, 2016. #zanata
+# Andreas Jaeger <jaegerandi@gmail.com>, 2016. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
-"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-03-07 20:43+0000\n"
+"Project-Id-Version: sahara-dashboard 5.0.0.0b2.dev23\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/openstack-i18n/\n"
+"POT-Creation-Date: 2016-06-17 21:09+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-03-09 10:45+0000\n"
-"Last-Translator: Shengjing Zhu <zsj950618@gmail.com>\n"
+"PO-Revision-Date: 2016-04-07 09:31+0000\n"
+"Last-Translator: Gaoxiao Zhu <zhu.gaoxiao@h3c.com>\n"
 "Language-Team: Chinese (China)\n"
 "Language: zh-CN\n"
 "X-Generator: Zanata 3.7.3\n"
@@ -62,14 +61,8 @@ msgstr "添加"
 msgid "Add Node Group"
 msgstr "增加节点组"
 
-msgid "Add custom tag"
-msgstr "添加自定义标签"
-
 msgid "Add libraries to your job template."
 msgstr "为您的任务模板添加类库。"
-
-msgid "Add plugin tags"
-msgstr "增加插件标签"
 
 msgid "Anti-affinity enabled for"
 msgstr "Anti-affinity 已启用在"
@@ -813,6 +806,7 @@ msgstr "启动"
 msgid "Launch Cluster"
 msgstr "启动集群"
 
+#, fuzzy
 msgid "Launch Job"
 msgid_plural "Launch Jobs"
 msgstr[0] "启动任务"
@@ -1154,10 +1148,6 @@ msgstr "Reducer"
 msgid "Register Image"
 msgstr "注册镜像"
 
-msgid ""
-"Register tags required for the Plugin with specified Data Processing Version"
-msgstr "指定版本的数据处理插件必须要注册标签"
-
 msgid "Relaunch On Existing Cluster"
 msgstr "在现有的集群上重新启动"
 
@@ -1409,16 +1399,6 @@ msgstr "Swift"
 msgid "Tags"
 msgstr "标签"
 
-msgid ""
-"Tags are used for filtering images suitable for each plugin and each Data "
-"Processing version.\n"
-"        To add required tags, select a plugin and a Data Processing version "
-"and click &quot;Add plugin tags&quot; button."
-msgstr ""
-"标签可以用来过滤合适的插件和数据处理版本的镜像。\n"
-"        如要增加标签，选择一个插件和一个数据处理版本，并点击“增加插件标签”按"
-"钮。"
-
 msgid "Template"
 msgstr "模板"
 
@@ -1604,9 +1584,6 @@ msgstr "无法获取插件的详细信息。"
 
 msgid "Unable to fetch plugin list"
 msgstr "无法获取插件列表"
-
-msgid "Unable to fetch plugin list."
-msgstr "无法获取插件列表。"
 
 msgid "Unable to fetch template object."
 msgstr "无法获取模板对象。"
