@@ -1,3 +1,0 @@
-request.REQUEST-is-removed.patch
-remove-load-url-from-future.patch
-disable-failed-manila-test.patch
