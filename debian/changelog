@@ -1,12 +1,13 @@
-sahara-dashboard (4.0.0-4) UNRELEASED; urgency=medium
+sahara-dashboard (5.0.0~b2-1) experimental; urgency=medium
 
   [ Ondřej Nový ]
   * d/rules: Removed UPSTREAM_GIT with default value
 
   [ Thomas Goirand ]
   * Added missing EPOC in (build-)depends: openstack-dashboard.
+  * New upstream release.
 
- -- Thomas Goirand <zigo@debian.org>  Fri, 27 May 2016 12:01:26 +0200
+ -- Thomas Goirand <zigo@debian.org>  Wed, 20 Jul 2016 09:24:22 +0200
 
 sahara-dashboard (4.0.0-2) unstable; urgency=medium
 
