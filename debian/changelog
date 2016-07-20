@@ -6,6 +6,7 @@ sahara-dashboard (5.0.0~b2-1) experimental; urgency=medium
   [ Thomas Goirand ]
   * Added missing EPOC in (build-)depends: openstack-dashboard.
   * New upstream release.
+  * Fixed (build-)depends for this release.
 
  -- Thomas Goirand <zigo@debian.org>  Wed, 20 Jul 2016 09:24:22 +0200
 
