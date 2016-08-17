@@ -1,0 +1,10 @@
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: Vitaly Gridnev <vgridnev@mirantis.com>
+Code-Review+2: Thierry Carrez <thierry@openstack.org>
+Workflow+1: Thierry Carrez <thierry@openstack.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 21 Mar 2016 09:48:29 +0000
+Reviewed-on: https://review.openstack.org/294878
+Project: openstack/deb-sahara-dashboard
+Branch: refs/heads/stable/mitaka
