@@ -1,0 +1,9 @@
+Code-Review+2: Chad Roberts <croberts@redhat.com>
+Code-Review+2: Nikita Konovalov <nkonovalov@mirantis.com>
+Workflow+1: Nikita Konovalov <nkonovalov@mirantis.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 21 Jul 2016 12:44:14 +0000
+Reviewed-on: https://review.openstack.org/334999
+Project: openstack/deb-sahara-dashboard
+Branch: refs/heads/master
