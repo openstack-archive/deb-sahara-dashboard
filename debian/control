@@ -38,8 +38,8 @@ Build-Depends-Indep: openstack-dashboard (>= 3:10.0.0~b2),
                      subunit,
                      testrepository,
 Standards-Version: 3.9.8
-Vcs-Git: https://anonscm.debian.org/git/openstack/sahara-dashboard.git
-Vcs-Browser: https://anonscm.debian.org/cgit/openstack/sahara-dashboard.git/
+Vcs-Git: https://git.openstack.org/openstack/deb-sahara-dashboard -b debian/newton
+Vcs-Browser: https://git.openstack.org/cgit/openstack/deb-sahara-dashboard?h=debian%2Fnewton
 Homepage: https://github.com/stackforge/sahara-dashboard
 
 Package: python-sahara-dashboard
