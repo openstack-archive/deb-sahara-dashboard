@@ -11,22 +11,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from django.template import defaultfilters as filters
+from django.template import loader
 from django.utils.translation import ugettext_lazy as _
 
 from horizon import tables
+
+from sahara_dashboard.content.data_processing.utils \
+    import workflow_helpers as w_helpers
+
+
+class UpdatePluginAction(tables.LinkAction):
+    name = "update_plugin"
+    verbose_name = _("Update Plugin")
+    url = "horizon:project:data_processing.data_plugins:update"
+    classes = ("ajax-modal", "btn-edit")
+
+
+def versions_to_string(plugin):
+    template_name = 'data_plugins/_list_versions.html'
+    versions = w_helpers.get_enabled_versions(plugin)
+    context = {"versions": versions}
+    return loader.render_to_string(template_name, context)
 
 
 class PluginsTable(tables.DataTable):
     title = tables.Column("title",
                           verbose_name=_("Title"),
                           link=("horizon:project:data_processing."
-                                "jobs:plugin-details"))
+                                "data_plugins:plugin-details"))
 
-    versions = tables.Column("versions",
-                             verbose_name=_("Supported Versions"),
-                             wrap_list=True,
-                             filters=(filters.unordered_list,))
+    versions = tables.Column(versions_to_string,
+                             verbose_name=_("Enabled Versions"))
 
     description = tables.Column("description",
                                 verbose_name=_("Description"))
@@ -34,3 +49,5 @@ class PluginsTable(tables.DataTable):
     class Meta(object):
         name = "plugins"
         verbose_name = _("Plugins")
+
+        row_actions = (UpdatePluginAction,)

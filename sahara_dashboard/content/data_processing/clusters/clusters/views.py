@@ -21,7 +21,6 @@ from oslo_utils import timeutils
 from saharaclient.api.base import APIException
 
 from horizon import exceptions
-from horizon import tables
 from horizon import tabs
 from horizon.utils import memoized
 from horizon import workflows
@@ -38,25 +37,6 @@ import sahara_dashboard.content.data_processing.clusters.clusters. \
 import sahara_dashboard.content.data_processing.clusters.clusters. \
     workflows.update as update_flow
 import sahara_dashboard.content.data_processing.utils.helpers as helpers
-
-
-class ClustersView(tables.DataTableView):
-    table_class = c_tables.ClustersTable
-    template_name = 'clusters/clusters.html'
-    page_title = _("Clusters")
-
-    def get_data(self):
-        try:
-            search_opts = {}
-            filter = self.get_server_filter_info(self.request)
-            if filter['value'] and filter['field']:
-                search_opts = {filter['field']: filter['value']}
-            clusters = saharaclient.cluster_list(self.request, search_opts)
-        except Exception:
-            clusters = []
-            exceptions.handle(self.request,
-                              _("Unable to fetch cluster list"))
-        return clusters
 
 
 class ClusterDetailsView(tabs.TabView):
@@ -88,7 +68,7 @@ class ClusterDetailsView(tabs.TabView):
 
     @staticmethod
     def get_redirect_url():
-        return reverse("horizon:project:data_processing.clusters:clusters-tab")
+        return reverse("horizon:project:data_processing.clusters:index")
 
 
 class ClusterEventsView(django_base.View):
@@ -225,7 +205,7 @@ class CreateClusterView(workflows.WorkflowView):
 
 class ConfigureClusterView(workflows.WorkflowView):
     workflow_class = create_flow.ConfigureCluster
-    success_url = "horizon:project:data_processing.clusters-tab"
+    success_url = "horizon:project:data_processing.clusters:index"
     template_name = "clusters/configure.html"
     page_title = _("Configure Cluster")
 
@@ -237,7 +217,7 @@ class ConfigureClusterView(workflows.WorkflowView):
 
 class ScaleClusterView(workflows.WorkflowView):
     workflow_class = scale_flow.ScaleCluster
-    success_url = "horizon:project:data_processing.clusters-tab"
+    success_url = "horizon:project:data_processing.clusters:index"
     classes = ("ajax-modal",)
     template_name = "clusters/scale.html"
     page_title = _("Scale Cluster")

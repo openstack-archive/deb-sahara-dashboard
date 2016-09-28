@@ -15,7 +15,6 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from horizon import exceptions
-from horizon import tables
 from horizon import tabs
 from horizon.utils import memoized
 from horizon import workflows
@@ -31,26 +30,6 @@ import sahara_dashboard.content.data_processing.clusters. \
     nodegroup_templates.workflows.create as create_flow
 import sahara_dashboard.content.data_processing.clusters. \
     nodegroup_templates.workflows.edit as edit_flow
-
-
-class NodegroupTemplatesView(tables.DataTableView):
-    table_class = _tables.NodegroupTemplatesTable
-    template_name = 'nodegroup_templates/nodegroup_templates.html'
-    page_title = _("Node Group Templates")
-
-    def get_data(self):
-        try:
-            search_opts = {}
-            filter = self.get_server_filter_info(self.request)
-            if filter['value'] and filter['field']:
-                search_opts = {filter['field']: filter['value']}
-            data = saharaclient.nodegroup_template_list(self.request,
-                                                        search_opts)
-        except Exception:
-            data = []
-            exceptions.handle(self.request,
-                              _("Unable to fetch node group template list."))
-        return data
 
 
 class NodegroupTemplateDetailsView(tabs.TabView):
@@ -85,7 +64,7 @@ class NodegroupTemplateDetailsView(tabs.TabView):
     @staticmethod
     def get_redirect_url():
         return reverse("horizon:project:data_processing."
-                       "clusters:nodegroup-templates-tab")
+                       "clusters:index")
 
 
 class CreateNodegroupTemplateView(workflows.WorkflowView):
@@ -101,7 +80,7 @@ class CreateNodegroupTemplateView(workflows.WorkflowView):
 class ConfigureNodegroupTemplateView(workflows.WorkflowView):
     workflow_class = create_flow.ConfigureNodegroupTemplate
     success_url = ("horizon:project:"
-                   "data_processing.clusters:nodegroup-templates-tab")
+                   "data_processing.clusters:index")
     template_name = "nodegroup_templates/configure.html"
     page_title = _("Create Node Group Template")
 
@@ -114,7 +93,7 @@ class ConfigureNodegroupTemplateView(workflows.WorkflowView):
 class CopyNodegroupTemplateView(workflows.WorkflowView):
     workflow_class = copy_flow.CopyNodegroupTemplate
     success_url = ("horizon:project:"
-                   "data_processing.clusters:nodegroup-templates-tab")
+                   "data_processing.clusters:index")
     template_name = "nodegroup_templates/configure.html"
 
     def get_context_data(self, **kwargs):
@@ -146,5 +125,5 @@ class CopyNodegroupTemplateView(workflows.WorkflowView):
 class EditNodegroupTemplateView(CopyNodegroupTemplateView):
     workflow_class = edit_flow.EditNodegroupTemplate
     success_url = ("horizon:project:"
-                   "data_processing.clusters:nodegroup-templates-tab")
+                   "data_processing.clusters:index")
     template_name = "nodegroup_templates/configure.html"

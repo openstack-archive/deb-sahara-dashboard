@@ -1,4 +1,4 @@
-sahara-dashboard (5.0.0~b2-1) experimental; urgency=medium
+sahara-dashboard (5.0.0~rc2-1) experimental; urgency=medium
 
   [ Ondřej Nový ]
   * d/rules: Removed UPSTREAM_GIT with default value
@@ -11,7 +11,9 @@ sahara-dashboard (5.0.0~b2-1) experimental; urgency=medium
     - request.REQUEST-is-removed.patch
     - remove-load-url-from-future.patch
     - disable-failed-manila-test.patch.
-  * Added django-1.10-django.conf.urls.patterns-is-removed.patch.
+  * Using OpenStack's Gerrit as VCS URLs:
+    - Point .gitreview file to packaging-deb project.
+    - Add .gitreview to extend-diff-ignore in d/s/options.
 
  -- Thomas Goirand <zigo@debian.org>  Wed, 20 Jul 2016 09:24:22 +0200
 

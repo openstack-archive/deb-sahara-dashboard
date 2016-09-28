@@ -53,8 +53,8 @@ class TestCRUDBase(SaharaTestCase):
 
     def create_image(self):
         image_pg = self.home_pg.go_to_compute_imagespage()
-        image_pg.create_image(self.image_name,
-                              location=self.CONFIG.sahara.fake_http_image)
+        image_pg.create_image(
+            self.image_name, image_file=self.CONFIG.sahara.fake_image_location)
         image_pg._wait_until(
             lambda x: image_pg.is_image_active(self.image_name),
             timeout=10 * 60)
@@ -83,19 +83,11 @@ class TestCRUDBase(SaharaTestCase):
 
         nodegrouptpls_pg.create(
             PLUGIN_NAME, PLUGIN_VERSION, nodegroup_name=self.worker_name,
+            floating_ip_pool=self.CONFIG.sahara.ip_pool,
             flavor=self.flavor_name, processes=['tasktracker', 'datanode'])
         self.assertTrue(nodegrouptpls_pg.has_success_message())
         self.assertFalse(nodegrouptpls_pg.has_error_message())
         self.assertTrue(nodegrouptpls_pg.is_present(self.worker_name),
-                        "Worker template was not created.")
-        nodegrouptpls_pg.create(
-            PLUGIN_NAME, PLUGIN_VERSION, nodegroup_name=self.master_name,
-            flavor=self.flavor_name,
-            proxygateway=True, floating_ip_pool=self.CONFIG.sahara.ip_pool,
-            processes=['jobtracker', 'namenode'])
-        self.assertTrue(nodegrouptpls_pg.has_success_message())
-        self.assertFalse(nodegrouptpls_pg.has_error_message())
-        self.assertTrue(nodegrouptpls_pg.is_present(self.master_name),
                         "Worker template was not created.")
 
         clustertpls_pg = (
@@ -135,7 +127,7 @@ class TestCRUDBase(SaharaTestCase):
         self.assertTrue(cluster_pg.is_cluster_active(self.cluster_name),
                         "Cluster is not active")
         self.assertEqual(
-            cluster_pg.get_cluster_instances_count(self.cluster_name), 3,
+            cluster_pg.get_cluster_instances_count(self.cluster_name), 2,
             "Cluster was not scaled")
 
     def create_datasources(self):

@@ -1,5 +1,5 @@
 [gerrit]
 host=review.openstack.org
 port=29418
-project=openstack/sahara-dashboard.git
-defaultbranch=stable/mitaka
+project=openstack/deb-sahara-dashboard.git
+defaultbranch=debian/newton

@@ -16,8 +16,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from horizon import tabs
 
-from sahara_dashboard.content.data_processing.jobs.data_plugins \
-    import tabs as plugin_tabs
 from sahara_dashboard.content.data_processing.jobs.data_sources \
     import tabs as data_source_tabs
 from sahara_dashboard.content.data_processing.jobs.job_binaries \
@@ -26,15 +24,16 @@ from sahara_dashboard.content.data_processing.jobs.job_templates \
     import tabs as job_template_tabs
 from sahara_dashboard.content.data_processing.jobs.jobs \
     import tabs as job_tabs
+from sahara_dashboard.content.data_processing.tabs \
+    import PaginationFriendlyTabGroup
 
 
-class JobTabs(tabs.TabGroup):
+class JobTabs(PaginationFriendlyTabGroup):
     slug = "job_tabs"
     tabs = (job_tabs.JobsTab,
             job_template_tabs.JobTemplatesTab,
             data_source_tabs.DataSourcesTab,
-            job_binary_tabs.JobBinariesTab,
-            plugin_tabs.PluginsTab,)
+            job_binary_tabs.JobBinariesTab,)
     sticky = True
 
 

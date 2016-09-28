@@ -26,9 +26,13 @@ ADD_INSTALLED_APPS = \
 ADD_PANEL = ('sahara_dashboard.content.data_processing.jobs.panel.JobsPanel')
 
 ADD_JS_FILES = [
-    'dashboard/project/data_processing/'
+    'dashboard/project/data_processing/js/'
     'data_processing.job_interface_arguments.js',
-    'dashboard/project/data_processing/data_processing.job_launching.js'
+    'dashboard/project/data_processing/js/data_processing.job_launching.js'
+]
+
+ADD_SCSS_FILES = [
+    'dashboard/project/data_processing/css/jobs.scss'
 ]
 
 ADD_EXCEPTIONS = {

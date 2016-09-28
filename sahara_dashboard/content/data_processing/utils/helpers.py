@@ -67,18 +67,20 @@ class Helpers(object):
 
         return self._extract_parameters(plugin.configs, 'node', 'general')
 
-    def get_targeted_node_group_configs(self, plugin_name, hadoop_version):
-        plugin = saharaclient.plugin_get_version_details(self.request,
-                                                         plugin_name,
-                                                         hadoop_version)
+    def get_general_and_service_nodegroups_parameters(self, plugin_name,
+                                                      hadoop_version):
+        plugin = saharaclient.plugin_get_version_details(
+            self.request, plugin_name, hadoop_version)
 
-        parameters = {}
+        general_parameters = self._extract_parameters(
+            plugin.configs, 'node', 'general')
 
+        service_parameters = {}
         for service in plugin.node_processes.keys():
-            parameters[service] = self._extract_parameters(plugin.configs,
-                                                           'node', service)
+            service_parameters[service] = self._extract_parameters(
+                plugin.configs, 'node', service)
 
-        return parameters
+        return general_parameters, service_parameters
 
     def get_targeted_cluster_configs(self, plugin_name, hadoop_version):
         plugin = saharaclient.plugin_get_version_details(self.request,
@@ -186,6 +188,7 @@ JOB_TYPE_MAP = {"pig": [_("Pig"), "Pig"],
                 "hive": [_("Hive"), "Hive"],
                 "spark": [_("Spark"), "Spark"],
                 "storm": [_("Storm"), "Storm"],
+                "storm.pyleus": [_("Storm Pyelus"), "Storm.Pyleus"],
                 "mapreduce": [_("MapReduce"), "MapReduce"],
                 "mapreduce.streaming": [_("Streaming MapReduce"),
                                         "MapReduce.Streaming"],

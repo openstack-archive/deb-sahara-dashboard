@@ -1,15 +1,16 @@
+# Akihiro Motoki <amotoki@gmail.com>, 2016. #zanata
 # Andreas Jaeger <jaegerandi@gmail.com>, 2016. #zanata
 # Shu Muto <shu-mutou@rf.jp.nec.com>, 2016. #zanata
 msgid ""
 msgstr ""
-"Project-Id-Version: sahara-dashboard 5.0.0.0b2.dev23\n"
+"Project-Id-Version: sahara-dashboard 5.0.0.0rc2.dev8\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/openstack-i18n/\n"
-"POT-Creation-Date: 2016-06-17 21:09+0000\n"
+"POT-Creation-Date: 2016-09-20 11:15+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-06-16 05:52+0000\n"
-"Last-Translator: Tsutomu Kimura <ebb0de2@jp.ibm.com>\n"
+"PO-Revision-Date: 2016-09-20 10:16+0000\n"
+"Last-Translator: Akihiro Motoki <amotoki@gmail.com>\n"
 "Language-Team: Japanese\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0\n"
@@ -17,6 +18,27 @@ msgstr ""
 
 msgid " Done"
 msgstr " 完了"
+
+msgid ""
+" Input correct User Name for image. For Ubuntu images input 'ubuntu', "
+"'fedora' for Fedora images,\n"
+"               'cloud-user' for CentOS 6.x images and 'centos' for CentOS 7."
+"x images."
+msgstr ""
+"イメージの正しいユーザー名を入力してください。\n"
+"Ubuntu イメージの場合は 'ubuntu'、 Fedora イメージの場合は 'fedora'、 CentOS "
+"6.x イメージの場合は 'cloud-user'、 CentOS7.x イメージの場合は 'centos' で"
+"す。"
+
+#, python-format
+msgid ""
+" Version: <b>%(hadoop_version)s</b>\n"
+"              of plugin <b>%(plugin_name)s </b>\n"
+"              is now deprecated. "
+msgstr ""
+"バージョン: プラグイン <b>%(plugin_name)s</b> の\n"
+"<b>%(hadoop_version)s</b>\n"
+"は廃止予定になっています。"
 
 msgid " or "
 msgstr "または"
@@ -94,6 +116,9 @@ msgstr "ベースイメージ"
 
 msgid "Cancel"
 msgstr "取り消し"
+
+msgid "Checked?"
+msgstr "チェック済み？"
 
 msgid "Checking"
 msgstr "確認中"
@@ -174,6 +199,12 @@ msgstr "ジョブで使用するクラスターを選択してください。"
 msgid "Chosen Libraries"
 msgstr "選択ライブラリー"
 
+msgid "Cinder Volume"
+msgstr "Cinder ボリューム"
+
+msgid "Cinder service is unavailable now"
+msgstr "Cinder サービスは現在利用できません。"
+
 msgid "Cinder volumes"
 msgstr "Cinder ボリューム"
 
@@ -207,9 +238,6 @@ msgstr " クラスターテンプレート %s が更新されました。"
 
 msgid "Cluster Template Configuration Overview"
 msgstr "クラスターテンプレート設定の概要"
-
-msgid "Cluster Template Name"
-msgstr "クラスターテンプレート名"
 
 #, python-format
 msgid "Cluster Template copy %s created"
@@ -299,6 +327,9 @@ msgstr "クラスターの共有を更新できませんでした"
 msgid "Could not update data source"
 msgstr "データソースを更新できませんでした"
 
+msgid "Could not update plugin"
+msgstr "プラグインを更新できませんでした"
+
 msgid "Count"
 msgstr "数"
 
@@ -382,6 +413,9 @@ msgstr "現在の種別:"
 
 msgid "Custom Tag"
 msgstr "カスタムタグ"
+
+msgid "DNS Domain Names"
+msgstr "DNS ドメイン名"
 
 msgid "Data Processing"
 msgstr "データ処理"
@@ -509,6 +543,12 @@ msgstr "説明"
 msgid "Details"
 msgstr "詳細"
 
+msgid "Domain Name"
+msgstr "ドメイン名"
+
+msgid "Domain name"
+msgstr "ドメイン名"
+
 msgid "Done"
 msgstr "完了"
 
@@ -552,6 +592,9 @@ msgstr "テンプレートの編集"
 msgid "Enable Swift Paths"
 msgstr "Swift のパス指定を有効にする"
 
+msgid "Enabled Versions"
+msgstr "有効なバージョン"
+
 msgctxt "End time"
 msgid "Ended"
 msgstr "終了時刻"
@@ -564,6 +607,9 @@ msgstr "ファイルの URL"
 
 msgid "Enter the username and password required to access that file"
 msgstr "そのファイルにアクセスするのに必要なユーザー名とパスワード"
+
+msgid "Ephemeral Drive"
+msgstr "一時ドライブ"
 
 msgid "Ephemeral drive"
 msgstr "一時ドライブ"
@@ -650,10 +696,11 @@ msgstr ""
 "リー」として追加できます。"
 
 msgid ""
-"For Spark and Shell jobs, only a main is required, \"libs\" are optional."
+"For Storm, Storm Pyleus, Spark and Shell jobs, only a main is required,\"libs"
+"\" are optional."
 msgstr ""
-"Spark ジョブとシェルジョブでは、「メイン」のみが必須で、ライブラリーは省略可"
-"能です。"
+"Storm、Storm Pyleus、Spark、およびシェルのジョブは、メインのみで必須で、 "
+"\"libs\" はオプションです。"
 
 msgid "General Info"
 msgstr "一般情報"
@@ -821,6 +868,12 @@ msgctxt "Current status of a Job"
 msgid "Killed"
 msgstr "強制終了"
 
+msgid "Label"
+msgstr "ラベル"
+
+msgid "Label details"
+msgstr "ラベルの詳細"
+
 msgid "Last Updated"
 msgstr "最終更新"
 
@@ -985,6 +1038,12 @@ msgstr "設定なし"
 msgid "No description"
 msgstr "説明なし"
 
+msgid "No domain is specified"
+msgstr "ドメインが指定されていません"
+
+msgid "No enabled versions"
+msgstr "有効なバージョンがありません"
+
 msgid "No image specified"
 msgstr "イメージが指定されていません。"
 
@@ -1130,8 +1189,22 @@ msgstr "プラグイン名"
 msgid "Plugin and Version Tag"
 msgstr "プラグインとバージョンタグ"
 
+msgid "Plugin label"
+msgstr "プラグインのラベル"
+
 msgid "Plugin name"
 msgstr "プラグイン名"
+
+msgid "Plugin update failed."
+msgstr "プラグインの更新に失敗しました。"
+
+#, python-format
+msgid "Plugin version %(version)s label"
+msgstr "プラグインバージョン %(version)s のラベル"
+
+#, python-format
+msgid "Plugin version %s"
+msgstr "プラグインバージョン %s"
 
 msgid "Plugin:"
 msgstr "プラグイン:"
@@ -1228,6 +1301,9 @@ msgstr "クラスターのサイズ調整操作に失敗しました"
 msgid "Scaled cluster successfully started."
 msgstr "サイズ調整後のクラスターを正常に開始しました"
 
+msgid "Scope"
+msgstr "スコープ"
+
 msgid "Script name"
 msgstr "スクリプト名"
 
@@ -1292,6 +1368,9 @@ msgstr ""
 msgid "Select property name"
 msgstr "プロパティー名を選択してください"
 
+msgid "Select the domain name for internal and external hostname resolution."
+msgstr "内部および外部のホスト名解決のためのドメイン名を選択してください。"
+
 msgid "Select the manila shares for this cluster"
 msgstr "このクラスター用の manila の共有を選択してください"
 
@@ -1327,6 +1406,18 @@ msgstr ""
 "この選択により、ジョブを正常に\n"
 "実行するために必要なステップが\n"
 "決定されます。"
+
+msgid ""
+"Selected domain name should already exist in the Designate.\n"
+"    You can check it in &quot;DNS&quot; tab on the left menu or by "
+"executing\n"
+"    &quot;designate domain-list&quot;\n"
+"    on the controller node."
+msgstr ""
+"選択したドメイン名は Designate に存在していなければいけません。\n"
+"左のメニューの &quot;DNS&quot; タブで確認するか、コマンド\n"
+"&quot;designate domain-list&quot;\n"
+"をコントローラーノードでを実行します。"
 
 msgid "Service Configurations"
 msgstr "サービス設定"
@@ -1394,6 +1485,12 @@ msgstr "ストレージ種別"
 
 msgid "Storm"
 msgstr "Storm"
+
+msgid "Storm Pyelus"
+msgstr "Storm Pyelus"
+
+msgid "Storm Pyleus"
+msgstr "Storm Pyleus"
 
 msgid "Streaming MapReduce"
 msgstr "ストリーミング MapReduce"
@@ -1526,6 +1623,9 @@ msgstr "以下のプラグイン用のノードグループテンプレートを
 msgid "Title"
 msgstr "タイトル"
 
+msgid "Topology Name"
+msgstr "トポロジー名"
+
 msgid "Type"
 msgstr "種別"
 
@@ -1534,6 +1634,10 @@ msgstr "URL"
 
 msgid "Unable to create job binary"
 msgstr "ジョブバイナリーを作成できません"
+
+#, python-format
+msgid "Unable to create job binary: %s"
+msgstr "ジョブバイナリーを作成できません: %s"
 
 msgid "Unable to create new cluster for job."
 msgstr "ジョブ用の新しいクラスターを作成できません"
@@ -1547,6 +1651,9 @@ msgstr "ID %s のベースイメージを取得できません。"
 
 msgid "Unable to fetch available images."
 msgstr "利用可能なイメージ一覧を取得できません。"
+
+msgid "Unable to fetch base image details"
+msgstr "ベースイメージを取得できません"
 
 msgid "Unable to fetch cluster list"
 msgstr "クラスターの一覧を取得できません。"
@@ -1590,9 +1697,6 @@ msgstr "インスタンスの詳細を取得できません。"
 msgid "Unable to fetch job binary list"
 msgstr "ジョブバイナリーの一覧を取得できません"
 
-msgid "Unable to fetch job binary list."
-msgstr "ジョブバイナリーの一覧を取得できません"
-
 #, python-format
 msgid "Unable to fetch job binary: %(exc)s"
 msgstr "ジョブバイナリーを取得できません: %(exc)s"
@@ -1609,13 +1713,13 @@ msgstr "ジョブ一覧を取得できません"
 msgid "Unable to fetch keypair choices."
 msgstr "キーペアの選択肢を取得できません"
 
+msgid "Unable to fetch network details"
+msgstr "ネットワークの詳細を取得できません"
+
 msgid "Unable to fetch node group details."
 msgstr "ノードグループの詳細を取得できません。"
 
 msgid "Unable to fetch node group template list"
-msgstr "ノードグループテンプレートの一覧を取得できません"
-
-msgid "Unable to fetch node group template list."
 msgstr "ノードグループテンプレートの一覧を取得できません"
 
 msgid "Unable to fetch plugin details."
@@ -1623,6 +1727,9 @@ msgstr "プラグインの詳細を取得できません"
 
 msgid "Unable to fetch plugin list"
 msgstr "プラグインの一覧を取得できません"
+
+msgid "Unable to fetch plugin object."
+msgstr "プラグインオブジェクトを取得できません。"
 
 msgid "Unable to fetch template object."
 msgstr "テンプレートオブジェクトを取得できません"
@@ -1644,9 +1751,6 @@ msgstr "ノードグループの詳細を取得できません。"
 
 msgid "Unable to get security group list."
 msgstr "セキュリティーグループの一覧を取得できません。"
-
-msgid "Unable to get volume type list."
-msgstr "ボリューム種別の一覧を取得できません。"
 
 msgid "Unable to launch job."
 msgstr "ジョブを起動できません"
@@ -1721,11 +1825,12 @@ msgstr "ノードグループテンプレートを設定できません"
 msgid "Unable to update job binary"
 msgstr "ジョブバイナリーを更新できません。"
 
+#, python-format
+msgid "Unable to update job binary: %s"
+msgstr "ジョブバイナリーを更新できません: %s"
+
 msgid "Unable to update row"
 msgstr "行を更新できません"
-
-msgid "Unable to upload cluster template file"
-msgstr "クラスターテンプレートファイルをアップロードできませんでした"
 
 msgid "Unable to upload job binary"
 msgstr "ジョブバイナリーをアップロードできません"
@@ -1750,8 +1855,14 @@ msgstr "更新"
 msgid "Update Cluster Shares"
 msgstr "クラスターの共有の更新"
 
+msgid "Update Plugin"
+msgstr "プラグインの更新"
+
 msgid "Update Shares"
 msgstr "共有の更新"
+
+msgid "Update the plugin labels"
+msgstr "プラグインのラベルの更新"
 
 msgid "Updated"
 msgstr "更新日時"
@@ -1791,6 +1902,9 @@ msgstr "anti-affinity グループを使用するプロセス:"
 
 msgid "Use auto-configuration"
 msgstr "自動設定を使用"
+
+msgid "Use the same topology name as defined in your .yaml file"
+msgstr ".yaml ファイルで定義したものと同じトポロジー名を使用してください"
 
 msgid "User"
 msgstr "ユーザー"

@@ -12,19 +12,14 @@
 # limitations under the License.
 
 from django.core.urlresolvers import reverse
-from django.core.urlresolvers import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
 from horizon import exceptions
-from horizon import forms
-from horizon import tables
 from horizon import tabs
 from horizon.utils import memoized
 from horizon import workflows
 
 from sahara_dashboard.api import sahara as saharaclient
-from sahara_dashboard.content.data_processing.clusters. \
-    cluster_templates import forms as cluster_forms
 import sahara_dashboard.content.data_processing.clusters. \
     cluster_templates.tables as ct_tables
 import sahara_dashboard.content.data_processing.clusters. \
@@ -35,12 +30,6 @@ import sahara_dashboard.content.data_processing.clusters. \
     cluster_templates.workflows.create as create_flow
 import sahara_dashboard.content.data_processing.clusters. \
     cluster_templates.workflows.edit as edit_flow
-
-
-class ClusterTemplatesView(tables.DataTableView):
-    table_class = ct_tables.ClusterTemplatesTable
-    template_name = 'cluster_templates/cluster_templates.html'
-    page_title = _("Cluster Templates")
 
 
 class ClusterTemplateDetailsView(tabs.TabView):
@@ -75,15 +64,7 @@ class ClusterTemplateDetailsView(tabs.TabView):
     @staticmethod
     def get_redirect_url():
         return reverse("horizon:project:data_processing."
-                       "clusters:cluster-templates-tab")
-
-
-class UploadFileView(forms.ModalFormView):
-    form_class = cluster_forms.UploadFileForm
-    template_name = 'cluster_templates/upload_file.html'
-    success_url = reverse_lazy(
-        'horizon:project:data_processing.clusters:cluster-templates-tab')
-    page_title = _("Upload Template")
+                       "clusters:index")
 
 
 class CreateClusterTemplateView(workflows.WorkflowView):
@@ -98,7 +79,7 @@ class CreateClusterTemplateView(workflows.WorkflowView):
 class ConfigureClusterTemplateView(workflows.WorkflowView):
     workflow_class = create_flow.ConfigureClusterTemplate
     success_url = ("horizon:project:data_processing.clusters"
-                   ":cluster-templates-tab")
+                   ":index")
     template_name = "cluster_templates/configure.html"
     page_title = _("Configure Cluster Template")
 
@@ -106,7 +87,7 @@ class ConfigureClusterTemplateView(workflows.WorkflowView):
 class CopyClusterTemplateView(workflows.WorkflowView):
     workflow_class = copy_flow.CopyClusterTemplate
     success_url = ("horizon:project:data_processing.clusters"
-                   ":cluster-templates-tab")
+                   ":index")
     template_name = "cluster_templates/configure.html"
     page_title = _("Copy Cluster Template")
 
@@ -138,6 +119,6 @@ class CopyClusterTemplateView(workflows.WorkflowView):
 
 class EditClusterTemplateView(CopyClusterTemplateView):
     workflow_class = edit_flow.EditClusterTemplate
-    success_url = ("horizon:project:data_processing.clusters:"
-                   "cluster-templates-tab")
+    success_url = ("horizon:project:data_processing.clusters"
+                   ":index")
     template_name = "cluster_templates/configure.html"
