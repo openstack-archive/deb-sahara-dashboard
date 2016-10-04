@@ -1,6 +1,6 @@
 sahara-dashboard (5.0.0~rc2-2) unstable; urgency=medium
 
-  * Uploading to unstable.
+  * Uploading to unstable (Closes: #837222).
 
  -- Thomas Goirand <zigo@debian.org>  Tue, 04 Oct 2016 15:19:09 +0200
 
