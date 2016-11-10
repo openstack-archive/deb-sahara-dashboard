@@ -1,0 +1,9 @@
+Code-Review+2: Telles Mota Vidal Nóbrega <tenobreg@redhat.com>
+Code-Review+2: Vitaly Gridnev <vgridnev@mirantis.com>
+Workflow+1: Vitaly Gridnev <vgridnev@mirantis.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 10 Nov 2016 18:23:27 +0000
+Reviewed-on: https://review.openstack.org/396316
+Project: openstack/deb-sahara-dashboard
+Branch: refs/heads/master
