@@ -1,0 +1,8 @@
+Code-Review+2: Vitaly Gridnev <vgridnev@mirantis.com>
+Workflow+1: Vitaly Gridnev <vgridnev@mirantis.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 07 Jun 2017 09:37:28 +0000
+Reviewed-on: https://review.openstack.org/469582
+Project: openstack/deb-sahara-dashboard
+Branch: refs/heads/master
